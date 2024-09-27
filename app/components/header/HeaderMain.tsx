@@ -7,6 +7,7 @@ import SearchModal from './SearchModal';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setSearch } from '@/redux/slices/HeaderSlice';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function HeaderMain() {
     const search = useAppSelector((state) => state.header.search);
@@ -22,7 +23,7 @@ export default function HeaderMain() {
         <div className='w-full bg-white h-20 justify-center px-2 flex flex-col items-center border-b border-solid border-primary/20 fixed z-40 top-0 left-0'>
             <header className='container'>
                 <nav className='w-full flex justify-between items-center px-2 sm:px-0'>
-                    <figure className='flex items-center'>
+                    <Link href='/' className='flex items-center'>
                         {/* <i className='block size-8 sm:size-10 fill-primary'>
                             {assets.svg.wandMagicSparkle}
                         </i> */}
@@ -41,7 +42,7 @@ export default function HeaderMain() {
                                 tour
                             </span>
                         </p>
-                    </figure>
+                    </Link>
 
                     <div
                         className={`hidden 2xl:!block ${
