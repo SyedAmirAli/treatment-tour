@@ -79,10 +79,10 @@ export default function CategoryBanner() {
 }
 
 interface CategoryBannerItemType {
-    id: Number;
-    title: String;
-    icon: String;
-    url: String;
+    id: number;
+    title: string;
+    icon: string;
+    url: string;
 }
 
 function CategoryBannerItem({
@@ -90,7 +90,7 @@ function CategoryBannerItem({
 }: {
     categoryBanner: CategoryBannerItemType;
 }) {
-    const { id, title, icon, url } = categoryBanner;
+    const { title, icon, url } = categoryBanner;
     return (
         <Link
             href={`${url}`}

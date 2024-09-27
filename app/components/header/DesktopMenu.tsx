@@ -123,7 +123,7 @@ export default function DesktopMenu() {
 }
 
 interface ChildrenMenuItemType {
-    title: String;
+    title: string;
     children?: ChildrenMenuItemType[];
 }
 

@@ -1,5 +1,4 @@
 import assets from '@/assets';
-import { useAppDispatch } from '@/redux/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -98,7 +97,7 @@ export default function ElementCard() {
 }
 
 interface CardItemType {
-    id: Number;
+    id: number;
     name: string;
     image: string;
     slug: string;
@@ -109,7 +108,6 @@ interface CardItemType {
 
 function CardItem({ card }: { card: CardItemType }) {
     const { title, image, name, slug, rating, type } = card;
-    const dispatch = useAppDispatch();
 
     return (
         <Link
