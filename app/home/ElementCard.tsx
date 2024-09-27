@@ -1,4 +1,5 @@
 import assets from '@/assets';
+import { useAppDispatch } from '@/redux/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -88,7 +89,7 @@ export default function ElementCard() {
         },
     ];
     return (
-        <div className='container py-6 flex flex-wrap gap-8 px-3 sm:px-0'>
+        <div className='container py-6 flex items-center justify-center flex-wrap gap-8 px-3 sm:px-0'>
             {cards.map((card) => (
                 <CardItem key={card.id} card={card} />
             ))}
@@ -108,6 +109,7 @@ interface CardItemType {
 
 function CardItem({ card }: { card: CardItemType }) {
     const { title, image, name, slug, rating, type } = card;
+    const dispatch = useAppDispatch();
 
     return (
         <Link
@@ -118,8 +120,7 @@ function CardItem({ card }: { card: CardItemType }) {
                     src={image}
                     alt={title}
                     fill
-                    objectFit='cover'
-                    className='rounded-t-xl duration-500 hover:scale-105'
+                    className='rounded-t-xl duration-500 hover:scale-105 object-cover'
                 />
 
                 {type === 'premium' && (

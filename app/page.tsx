@@ -1,3 +1,3 @@
-export default function Home() {
-    return <div className='text-9xl'>Home</div>;
-}
+import HomeRoot from './home/page';
+
+export default HomeRoot;
