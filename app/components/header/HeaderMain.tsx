@@ -34,7 +34,7 @@ export default function HeaderMain() {
                             alt='Logo'
                         />
 
-                        <p className='font-bold text-sm sm:text-xl uppercase tracking-wide'>
+                        <p className='font-bold text-sm sm:text-xl uppercase tracking-wide sm:block hidden'>
                             <span className='block leading-5 text-blue-500'>
                                 treatment
                             </span>
@@ -57,11 +57,11 @@ export default function HeaderMain() {
                             <i className='block h-4 w-4 ml-2 fill-primary'>
                                 {assets.svg.phoneVolume}
                             </i>
-                            <a
+                            <Link
                                 href='#'
                                 className='font-bold text-primary duration-300 hover:underline'>
                                 +1-855-912-8960
-                            </a>
+                            </Link>
                         </div>
 
                         <div className='flex items-center gap-3 sm:gap-6'>

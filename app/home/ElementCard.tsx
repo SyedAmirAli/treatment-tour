@@ -2,6 +2,7 @@ import assets from '@/assets';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import ServiceDetails from '../components/commons/ServiceDetails';
 
 export default function ElementCard() {
     const cards = [
@@ -87,8 +88,16 @@ export default function ElementCard() {
             type: 'premium',
         },
     ];
+
     return (
         <div className='container py-6 flex items-center justify-center flex-wrap gap-8 px-3 sm:px-0'>
+            <div className='py-6 w-full'>
+                <ServiceDetails
+                    title='Our Social Services About'
+                    name='Treatment Tour'
+                />
+            </div>
+
             {cards.map((card) => (
                 <CardItem key={card.id} card={card} />
             ))}

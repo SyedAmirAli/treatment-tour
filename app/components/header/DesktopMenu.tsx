@@ -1,7 +1,8 @@
 'use client';
 import assets from '@/assets';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 export default function DesktopMenu() {
     const children = [
@@ -58,6 +59,16 @@ export default function DesktopMenu() {
     ];
 
     const [menuActive, setMenuActive] = useState(-1);
+    const pathname = usePathname();
+
+    useEffect(
+        function () {
+            if (pathname === '/contact') {
+                setMenuActive(0);
+            } else setMenuActive(-1);
+        },
+        [pathname]
+    );
 
     return (
         <ul className='flex 2xl:gap-12 flex-col relative 2xl:flex-row bg-white border border-solid border-slate-300 2xl:border-none rounded-lg 2xl:bg-transparent p-4 gap-0'>
@@ -66,7 +77,7 @@ export default function DesktopMenu() {
                     url: '/contact',
                     title: 'Contacts',
                     icon: assets.svg.cardClip,
-                    children,
+                    children: [],
                 },
                 {
                     url: '#',
@@ -84,7 +95,10 @@ export default function DesktopMenu() {
                     url: '#',
                     title: 'More',
                     icon: assets.svg.downLeftAndUpRight,
-                    children,
+                    children: [
+                        { title: 'Contact', url: '/contact' },
+                        { title: 'Report Us', url: '#' },
+                    ],
                 },
             ].map((item, i) => (
                 <li
@@ -95,9 +109,11 @@ export default function DesktopMenu() {
                     }>
                     <button
                         onClick={() => {
-                            if (menuActive === i) {
-                                setMenuActive(-1);
-                            } else setMenuActive(i);
+                            if (i !== 0) {
+                                if (menuActive === i) {
+                                    setMenuActive(-1);
+                                } else setMenuActive(i);
+                            }
                         }}
                         className='text-md flex gap-1 items-center 2xl:justify-center justify-between font-semibold bg-slate-100 px-4 rounded-md w-full 2xl:w-auto 2xl:rounded-full py-3 text-slate-600 fill-slate-600 h-[44px] duration-300 group-hover:bg-primary group-hover:text-slate-100 group-[.active]:bg-primary group-[.active]:text-slate-100'>
                         <Link
@@ -108,9 +124,11 @@ export default function DesktopMenu() {
                             </i>
                             <span className='leading-3'>{item.title}</span>
                         </Link>
-                        <i className='block h-3 w-3 duration-500 group-hover:fill-slate-100 group-hover:rotate-90 group-[.active]:fill-slate-100 group-[.active]:rotate-90'>
-                            {assets.svg.chevronRight}
-                        </i>
+                        {![0].includes(i) && (
+                            <i className='block h-3 w-3 duration-500 group-hover:fill-slate-100 group-hover:rotate-90 group-[.active]:fill-slate-100 group-[.active]:rotate-90'>
+                                {assets.svg.chevronRight}
+                            </i>
+                        )}
                     </button>
 
                     {item.children.length > 0 && (
@@ -124,6 +142,7 @@ export default function DesktopMenu() {
 
 interface ChildrenMenuItemType {
     title: string;
+    url?: string;
     children?: ChildrenMenuItemType[];
 }
 
@@ -141,12 +160,12 @@ function ChildrenMenu({ menu }: ChildrenMenuProps) {
 }
 
 function ChildrenMenuItem({ menuItem }: { menuItem: ChildrenMenuItemType }) {
-    const { title, children } = menuItem;
+    const { url, title, children } = menuItem;
 
     return (
         <li className='px-4 py-1 2xl:w-56 hidden 2xl:group-hover:!block group-[.active]:block 2xl:group-[.active]:hidden group children relative'>
-            <a
-                href='#'
+            <Link
+                href={url || '#'}
                 className='flex gap-2 py-4 rounded-lg px-3 font-medium text-lg capitalize w-full justify-between items-center bg-slate-50 text-slate-500 border border-solid border-slate-100 hover:bg-slate-100 hover:text-primary hover:fill-primary hover:tracking-wide duration-500'>
                 <span className='leading-3 text-nowrap'>{title}</span>
                 {children && children.length > 0 && (
@@ -154,7 +173,7 @@ function ChildrenMenuItem({ menuItem }: { menuItem: ChildrenMenuItemType }) {
                         {assets.svg.chevronRight}
                     </i>
                 )}
-            </a>
+            </Link>
 
             {Array.isArray(children) && (
                 <div className='hidden group-[.children:hover]:block 2xl:absolute left-56 -top-16'>

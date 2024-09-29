@@ -35,20 +35,16 @@ export default function ContactInformation() {
                         icon: `<i class='fa-brands fa-x-twitter'></i>`,
                     },
                 ].map((item, index) => (
-                    <Link
-                        href={item.url}
-                        className='flex gap-3 py-0.5 group'
-                        key={index}>
+                    <div className='flex gap-3 py-0.5 group' key={index}>
                         <span
                             dangerouslySetInnerHTML={{ __html: item.icon }}
                             className='text-lg text-slate-600 duration-500 group-hover:text-primary'></span>
-                        <a
-                            target='_blank'
-                            rel='noopener noreferrer'
+                        <Link
+                            href={item.url}
                             className='font-suse font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
                             {item.title}
-                        </a>
-                    </Link>
+                        </Link>
+                    </div>
                 ))}
             </div>
 
@@ -73,13 +69,12 @@ export default function ContactInformation() {
                         <span
                             dangerouslySetInnerHTML={{ __html: item.icon }}
                             className='text-lg text-slate-600 duration-500 group-hover:text-primary'></span>
-                        <a
+                        <Link
                             href={item.url}
                             target='_blank'
-                            rel='noopener noreferrer'
                             className='font-suse font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
                             {item.title}
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>
@@ -105,13 +100,12 @@ export default function ContactInformation() {
                         <span
                             dangerouslySetInnerHTML={{ __html: item.icon }}
                             className='text-lg text-slate-600 duration-500 group-hover:text-primary'></span>
-                        <a
-                            key={index}
+                        <Link
+                            href={item.url}
                             target='_blank'
-                            rel='noopener noreferrer'
                             className='font-suse font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
                             {item.title}
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>
@@ -127,25 +121,23 @@ export default function ContactInformation() {
                 <span className='text-lg text-slate-600 duration-500 group-hover:text-primary'>
                     <i className='fa-solid fa-location-dot'></i>
                 </span>
-                <a
+                <Link
                     href='https://maps.app.goo.gl/THUMqQbQZgdbJid67'
                     target='_blank'
-                    rel='noopener noreferrer'
                     className='font-suse break-all font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
                     https://maps.app.goo.gl/THUMqQbQZgdbJid67
-                </a>
+                </Link>
             </div>
             <div className='flex gap-3 py-0.5 group -mt-1'>
                 <span className='text-lg text-slate-600 duration-500 group-hover:text-primary'>
                     <i className='fa-solid fa-location-pin-lock'></i>
                 </span>
-                <a
+                <Link
                     href='https://maps.app.goo.gl/THUMqQbQZgdbJid67'
                     target='_blank'
-                    rel='noopener noreferrer'
                     className='font-suse break-all font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
                     https://maps.app.goo.gl/THUMqQbQZgdbJid67
-                </a>
+                </Link>
             </div>
         </div>
     );

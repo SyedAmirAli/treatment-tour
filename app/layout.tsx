@@ -4,6 +4,7 @@ import './globals.css';
 import StoreProvider from './StoreProvider';
 import WithHeader from './components/header';
 import Script from 'next/script';
+import Footer from './components/footer';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -38,6 +39,7 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <StoreProvider>
                     <WithHeader>{children}</WithHeader>
+                    <Footer />
                 </StoreProvider>
             </body>
         </html>

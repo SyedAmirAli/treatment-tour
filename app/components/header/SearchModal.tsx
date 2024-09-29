@@ -2,6 +2,7 @@
 import assets from '@/assets';
 import { useAppDispatch } from '@/redux/hooks';
 import { setSearch } from '@/redux/slices/HeaderSlice';
+import Link from 'next/link';
 import React from 'react';
 
 export default function SearchModal() {
@@ -169,14 +170,14 @@ export default function SearchModal() {
                                             </p>
                                         </div>
                                     </div>
-                                    <a
+                                    <Link
                                         href='#'
                                         className='text-sm leading-[1.3] pt-1 duration-300 hover:text-blue-500 block hover:underline'>
                                         Lorem ipsum dolor sit amet consectetur,
                                         adipisicing elit. Nulla voluptatum
                                         corporis blanditiis dicta? Nam ut
                                         eveniet nisi sed consequuntur .
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

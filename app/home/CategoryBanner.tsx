@@ -91,6 +91,7 @@ function CategoryBannerItem({
     categoryBanner: CategoryBannerItemType;
 }) {
     const { title, icon, url } = categoryBanner;
+
     return (
         <Link
             href={`${url}`}
