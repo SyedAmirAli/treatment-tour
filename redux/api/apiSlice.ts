@@ -36,7 +36,7 @@ const apiSlice = createApi({
         >
     ) => ({
         getClinics: builder.query({ query: () => '/clinics/' }),
-        getCategories: builder.query({ query: () => '/categories' }),
+        getCategories: builder.query({ query: () => '/categoriess' }),
     }),
 });
 

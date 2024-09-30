@@ -2,15 +2,19 @@ import React from 'react';
 import { Carousel } from 'primereact/carousel';
 import Image from 'next/image';
 
-const BrandCarousel = () => {
-    const brands = [
+const BrandCarousel = ({
+    brands = [
         { id: 1, title: '', image: '/images/brand-1.png' },
         { id: 2, title: '', image: '/images/brand-2.png' },
         { id: 3, title: '', image: '/images/brand-3.png' },
         { id: 4, title: '', image: '/images/brand-4.png' },
         { id: 5, title: '', image: '/images/brand-5.png' },
-    ];
-
+    ],
+    height = '64px',
+}: {
+    brands?: object[];
+    height?: number | string;
+}) => {
     // Responsive options for the carousel
     const responsiveOptions = [
         {
@@ -20,17 +24,17 @@ const BrandCarousel = () => {
         },
         {
             breakpoint: '1199px',
-            numVisible: 5,
-            numScroll: 1,
-        },
-        {
-            breakpoint: '767px',
             numVisible: 3,
             numScroll: 1,
         },
         {
+            breakpoint: '767px',
+            numVisible: 1,
+            numScroll: 1,
+        },
+        {
             breakpoint: '575px',
-            numVisible: 2,
+            numVisible: 1,
             numScroll: 1,
         },
     ];
@@ -39,7 +43,9 @@ const BrandCarousel = () => {
     const brandTemplate = (brand: { title: string; image: string }) => {
         return (
             <div className='border-surface-200 dark:border-surface-700 rounded m-2 p-4'>
-                <figure className='relative mx-auto mb-4 h-16 px-4'>
+                <figure
+                    className='relative mx-auto mb-4 px-4'
+                    style={{ height }}>
                     <Image
                         fill
                         src={brand?.image}
