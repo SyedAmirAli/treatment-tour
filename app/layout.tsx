@@ -45,3 +45,12 @@ export default function RootLayout({
         </html>
     );
 }
+
+// declare global{
+//     interface Window{
+//         asset:function (endpoint='', slash =true) {
+//             return process.env.NEXT_PUBLIC_MAIN_URL + '/'+endpoint;
+//         }
+//     }
+// }
+// global.d.ts

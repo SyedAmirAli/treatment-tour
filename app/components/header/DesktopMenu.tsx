@@ -1,10 +1,17 @@
 'use client';
 import assets from '@/assets';
+import info from '@/assets/info';
+import { useGetCategoriesQuery } from '@/redux/api/apiSlice';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function DesktopMenu() {
+    const { isError, data, error, isLoading } =
+        useGetCategoriesQuery(undefined);
+
+    info({ isError, data, error, isLoading });
+
     const children = [
         {
             children: [

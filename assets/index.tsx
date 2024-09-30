@@ -1,3 +1,28 @@
+interface assetsTypes {
+    svg: {
+        home: JSX.Element;
+        login: JSX.Element;
+        phoneVolume: JSX.Element;
+        wandMagicSparkle: JSX.Element;
+        cardClip: JSX.Element;
+        gem: JSX.Element;
+        locationCrosshair: JSX.Element;
+        downLeftAndUpRight: JSX.Element;
+        chevronUp: JSX.Element;
+        chevronDown: JSX.Element;
+        chevronLeft: JSX.Element;
+        chevronRight: JSX.Element;
+        search: JSX.Element;
+        sendPlane: JSX.Element;
+        close: JSX.Element;
+        starFill: JSX.Element;
+        star: JSX.Element;
+        menu: JSX.Element;
+        handHoldingHeart: JSX.Element;
+        cartDown: JSX.Element;
+    };
+}
+
 export default {
     svg: {
         home: (
@@ -187,4 +212,4 @@ export default {
             </svg>
         ),
     },
-};
+} as assetsTypes;
