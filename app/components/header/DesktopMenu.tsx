@@ -41,6 +41,17 @@ export default function DesktopMenu() {
             if (pathname === '/contact') {
                 setMenuActive(0);
             } else setMenuActive(-1);
+
+            if (pathname.startsWith('/country')) {
+                setMenuActive(1);
+            }
+
+            if (pathname.startsWith('/treatment')) {
+                setMenuActive(2);
+            }
+            if (pathname.startsWith('/report')) {
+                setMenuActive(3);
+            }
         },
         [pathname]
     );

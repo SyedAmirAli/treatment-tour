@@ -1,5 +1,5 @@
 'use client';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 import React from 'react';
 import {
@@ -12,6 +12,9 @@ import ClinicItem, { ClinicItemType } from '@/app/home/ClinicItem';
 
 export default function Root() {
     const { slug } = useParams();
+    const pathname = usePathname();
+
+    info(pathname.endsWith('/country/' + slug));
 
     const {
         isError: clinicIsError,
@@ -35,7 +38,7 @@ export default function Root() {
             clinicError,
             clinicIsLoading,
         },
-        'ignores'
+        'ignore'
     );
     info(
         'country/[slug]/page.Tsx',
@@ -46,7 +49,7 @@ export default function Root() {
             countryError,
             countryIsLoading,
         },
-        'ignores'
+        'ignore'
     );
 
     return (
