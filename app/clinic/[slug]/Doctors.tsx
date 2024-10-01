@@ -1,4 +1,4 @@
-import { info } from 'console';
+import info from '@/assets/info';
 import Image from 'next/image';
 import React from 'react';
 
