@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setSearch } from '@/redux/slices/HeaderSlice';
 import Image from 'next/image';
 import Link from 'next/link';
+import info from '@/assets/info';
 
 export default function HeaderMain() {
     const search = useAppSelector((state) => state.header.search);
@@ -19,14 +20,15 @@ export default function HeaderMain() {
 
     const [activeNav, setActiveNav] = useState(false);
 
+    function loginHandler() {
+        info('HeaderMain.tsx', 'Login Button Clicked');
+    }
+
     return (
         <div className='w-full bg-white h-20 justify-center px-2 flex flex-col items-center border-b border-solid border-primary/20 fixed z-40 top-0 left-0'>
             <header className='container'>
                 <nav className='w-full flex justify-between items-center px-2 sm:px-0'>
                     <Link href='/' className='flex items-center'>
-                        {/* <i className='block size-8 sm:size-10 fill-primary'>
-                            {assets.svg.wandMagicSparkle}
-                        </i> */}
                         <Image
                             src='/images/logo.jpeg'
                             width={80}
@@ -83,7 +85,9 @@ export default function HeaderMain() {
                                     User Profile
                                 </span>
                             </button>
-                            <button className='flex gap-3 items-center justify-center bg-black border border-solid border-slate-300 px-3 py-3 sm:py-2 sm:rounded-md uppercase font-bold text-slate-100 text-sm fill-slate-100 duration-500 hover:bg-primary rounded-full'>
+                            <button
+                                className='flex gap-3 items-center justify-center bg-black border border-solid border-slate-300 px-3 py-3 sm:py-2 sm:rounded-md uppercase font-bold text-slate-100 text-sm fill-slate-100 duration-500 hover:bg-primary rounded-full'
+                                onClick={loginHandler}>
                                 <i className='w-4 h-4'>{assets.svg.login}</i>
                                 <span className='hidden sm:block'>Login</span>
                             </button>
@@ -104,7 +108,3 @@ export default function HeaderMain() {
         </div>
     );
 }
-
-/* 
-দেখেন ভাই ভাই আমি লাভ লসের কথা চিন্তা করে কাজ করি না কখনোই, আমি শুধু চাই আমার দ্বারা যেন তাড়া উপকৃত হয়, আর নহলেও যেন ক্ষতি না হয়!
-*/

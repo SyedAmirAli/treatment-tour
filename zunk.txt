@@ -1,0 +1,519 @@
+
+                {/* <div className='break-all'> */}
+                {/* </div> */}
+                {/* <div> */}
+                {/* {Array.from({ length: Math.max(0, 5) }).map((_, i) =>
+                            i < average_rating ? (
+                                <i
+                                    key={i}
+                                    className='size-5 p-0.5 bg-white fill-primary text-primary rounded block'>
+                                    {assets.svg.starFill}
+                                </i>
+                            ) : (
+                                <i
+                                    key={i}
+                                    className='size-5 p-1 bg-primary fill-white text-white rounded block'>
+                                    {assets.svg.starFill}
+                                </i>
+                            )
+                        )} */}
+                {/* </div> */}
+                        {/* <i className='block size-8 sm:size-10 fill-primary'>
+                            {assets.svg.wandMagicSparkle}
+                        </i> */}
+/* {
+    "id,": 2,
+    "name,": "fds",
+    "description,": "fsdf",
+    "address,": "",
+    "main_image,": "1726923756.jpg",
+    "gallery_images,": "[\"1726923756436.jpg\",\"1726923756828.jpg\"]",
+    "map_embed_code,": "gfdg",
+    "country_id,": "fsdf",
+    "state_id,": "fsdf",
+    "created_at,": "2024-09-21T07:02:36.000000Z",
+    "country,": "11",
+    "state,": "33",
+    "average_rating,": 0
+} */
+
+    // id: number;
+    // name: string;
+    // image: string;
+    // slug: string;
+    // rating: number;
+    // title: string;
+    // type: string;
+
+    // const cards = [
+    //     {
+    //         id: 1,
+    //         image: '/images/1.jpg',
+    //         name: 'Bogotá, Colombia',
+    //         rating: 4.9,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-1',
+    //         type: 'premium',
+    //     },
+    //     {
+    //         id: 2,
+    //         image: '/images/2.jpg',
+    //         name: 'Carlos Merlano',
+    //         rating: 2.3,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-2',
+    //         type: 'new',
+    //     },
+    //     {
+    //         id: 3,
+    //         image: '/images/3.jpg',
+    //         name: 'Dr. Dario Juris',
+    //         rating: 4,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-3',
+    //         type: 'premium',
+    //     },
+    //     {
+    //         id: 4,
+    //         image: '/images/4.jpg',
+    //         name: 'Barranquilla',
+    //         rating: 1,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-4',
+    //         type: 'new',
+    //     },
+    //     {
+    //         id: 5,
+    //         image: '/images/5.jpg',
+    //         name: 'Bogotá, Colombia',
+    //         rating: 3,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-5',
+    //         type: 'new',
+    //     },
+    //     {
+    //         id: 6,
+    //         image: '/images/6.jpg',
+    //         name: 'Jaime Losada Ruiz',
+    //         rating: 5,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-6',
+    //         type: 'premium',
+    //     },
+    //     {
+    //         id: 7,
+    //         image: '/images/7.jpg',
+    //         name: 'Jaime Losada Ruiz',
+    //         rating: 2.9,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-7',
+    //         type: 'premium',
+    //     },
+    //     {
+    //         id: 8,
+    //         image: '/images/8.jpg',
+    //         name: 'Bogotá, Colombia',
+    //         rating: 3.6,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-8',
+    //         type: 'new',
+    //     },
+    //     {
+    //         id: 9,
+    //         image: '/images/9.jpg',
+    //         name: 'Harker y Lloreda',
+    //         rating: 4.3,
+    //         title: 'Medellin, Colombia',
+    //         slug: 'xyz-slug-9',
+    //         type: 'premium',
+    //     },
+    // ];
+
+
+'use client';
+import assets from '@/assets';
+import info from '@/assets/info';
+import {
+    useGetCategoriesQuery,
+    // useGetClinicsDoctorsQuery,
+    // useGetClinicsQuery,
+    useGetLocationsQuery,
+} from '@/redux/api/apiSlice';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
+export default function DesktopMenu() {
+    const { isError, error, isLoading, data } =
+        useGetCategoriesQuery(undefined);
+
+    const {
+        isError: locationIsError,
+        isLoading: locationIsLoading,
+        error: locationError,
+        data: locations,
+    } = useGetLocationsQuery(undefined);
+
+    info(
+        'useGetCategoriesQuery',
+        { isError, error, isLoading, data },
+        'ignore'
+    );
+    info(
+        'useGetLocationsQuery',
+        { locations, locationIsError, locationIsLoading, locationError },
+        'ignore'
+    );
+
+    const [menuActive, setMenuActive] = useState(-1);
+    const pathname = usePathname();
+
+    useEffect(
+        function () {
+            if (pathname === '/contact') {
+                setMenuActive(0);
+            } else setMenuActive(-1);
+        },
+        [pathname]
+    );
+
+    return (
+        <ul className='flex 2xl:gap-12 flex-col relative 2xl:flex-row bg-white border border-solid border-slate-300 2xl:border-none rounded-lg 2xl:bg-transparent p-4 gap-0'>
+            {[
+                {
+                    url: '/contact',
+                    title: 'Contacts',
+                    icon: assets.svg.cardClip,
+                    subcategories: [],
+                    prefix: 'contact',
+                },
+                {
+                    url: '#',
+                    title: 'Locations',
+                    icon: assets.svg.locationCrosshair,
+                    subcategories: locations,
+                    prefix: 'country',
+                },
+                {
+                    url: '#',
+                    title: 'Treatments',
+                    icon: assets.svg.gem,
+                    subcategories: data,
+                    prefix: 'treatment',
+                },
+                {
+                    url: '#',
+                    title: 'More',
+                    icon: assets.svg.downLeftAndUpRight,
+                    subcategories: [
+                        { name: 'Contact', url: '/contact' },
+                        { name: 'Report Us', url: '#' },
+                    ],
+                    prefix: 'more',
+                },
+            ].map((item, i) => (
+                <li
+                    key={i}
+                    className={
+                        'group 2xl:w-32 2xl:py-4 py-1 flex flex-col 2xl:flex-row 2xl:items-center 2xl:justify-center relative group ' +
+                        (i === menuActive ? 'active' : '')
+                    }>
+                    <button
+                        onClick={() => {
+                            if (i !== 0) {
+                                if (menuActive === i) {
+                                    setMenuActive(-1);
+                                } else setMenuActive(i);
+                            }
+                        }}
+                        className='text-md flex gap-1 items-center 2xl:justify-center justify-between font-semibold bg-slate-100 px-4 rounded-md w-full 2xl:w-auto 2xl:rounded-full py-3 text-slate-600 fill-slate-600 h-[44px] duration-300 group-hover:bg-primary group-hover:text-slate-100 group-[.active]:bg-primary group-[.active]:text-slate-100'>
+                        <Link
+                            href={item.url}
+                            className='flex gap-1 items-center justify-center'>
+                            <i className='block group-hover:pr-2 group-[.active]:pr-2 duration-500 size-7 pr-2 2xl:pr-0 fill-primary 2xl:size-0 2xl:group-hover:size-7 group-[.active]:w-7 group-[.active]:h-7 group-[.active]:fill-slate-100 group-hover:fill-slate-100'>
+                                {item.icon}
+                            </i>
+                            <span className='leading-3'>{item.title}</span>
+                        </Link>
+                        {![0].includes(i) && (
+                            <i className='block h-3 w-3 duration-500 group-hover:fill-slate-100 group-hover:rotate-90 group-[.active]:fill-slate-100 group-[.active]:rotate-90'>
+                                {assets.svg.chevronRight}
+                            </i>
+                        )}
+                    </button>
+
+                    {item?.subcategories?.length > 0 && (
+                        <ChildrenMenu
+                            menu={item.subcategories}
+                            prefix={item.prefix}
+                        />
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+interface ChildrenMenuItemType {
+    id: number;
+    name: string;
+    url?: string;
+    subcategories?: ChildrenMenuItemType[];
+    prefix: string;
+}
+
+interface ChildrenMenuProps {
+    menu: ChildrenMenuItemType[];
+    prefix: string;
+    suffix?: string;
+}
+
+function ChildrenMenu({ menu, prefix, suffix }: ChildrenMenuProps) {
+    return (
+        <ul className='2xl:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 group-hover:py-4'>
+            {menu.map((cItem, i) => (
+                <ChildrenMenuItem
+                    menuItem={cItem}
+                    key={i}
+                    prefix={prefix}
+                    suffix={suffix}
+                />
+            ))}
+        </ul>
+    );
+}
+
+function ChildrenMenuItem({
+    menuItem,
+    prefix,
+    suffix = '',
+}: {
+    menuItem: ChildrenMenuItemType;
+    prefix: string;
+    suffix?: string;
+}) {
+    const { id, url, name, subcategories } = menuItem;
+
+    info(menuItem, 'ignore');
+    info(`${prefix}${suffix}/${id}`);
+
+    return (
+        <li className='px-4 py-1 2xl:w-56 hidden 2xl:group-hover:!block group-[.active]:block 2xl:group-[.active]:hidden group children relative'>
+            <Link
+                href={
+                    ('url' in menuItem ? url : `${prefix}${suffix}/${id}`) ||
+                    '#'
+                }
+                className='flex gap-2 py-4 rounded-lg px-3 font-medium text-lg capitalize w-full justify-between items-center bg-slate-50 text-slate-500 border border-solid border-slate-100 hover:bg-slate-100 hover:text-primary hover:fill-primary hover:tracking-wide duration-500'>
+                <span className='leading-3 text-nowrap'>{name}</span>
+                {subcategories && subcategories.length > 0 && (
+                    <i className='block size-3 duration-500 group-[.children:hover]:rotate-90'>
+                        {assets.svg.chevronRight}
+                    </i>
+                )}
+            </Link>
+
+            {Array.isArray(subcategories) && (
+                <div className='hidden group-[.children:hover]:block 2xl:absolute left-56 -top-16'>
+                    <ChildrenMenu
+                        menu={subcategories}
+                        prefix={prefix}
+                        suffix={prefix === 'country' ? '/state' : '/clinic'}
+                    />
+                </div>
+            )}
+        </li>
+    );
+}
+
+// (typeof url === 'string' &&
+//     url !== '#' &&
+//     url &&
+//     prefix + '/' + id) ||
+// '#'
+
+// // info({ locationIsError, locationIsLoading, locations, locationError });
+// const clinicDoctors = useGetClinicsDoctorsQuery(undefined);
+// info({ clinicDoctors });
+// const {
+//     isError: clinicIsError,
+//     data: clinics,
+//     error: clinicError,
+//     isLoading: clinicIsLoading,
+// } = useGetClinicsQuery(undefined);
+
+// info({ clinicIsError, clinics, clinicError, clinicIsLoading });
+/* const subcategories = [
+        {
+            subcategories: [
+                { title: 'New Locations' },
+                { title: 'Locations Colombia' },
+                { title: 'Locations Costa Rica' },
+                { title: 'Locations Indonesia' },
+            ],
+            title: 'Locations',
+        },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'New Colombia' },
+                { title: 'Colombia Costa Rica' },
+                { title: 'Colombia Indonesia' },
+            ],
+            title: 'Colombia',
+        },
+        { subcategories: [], title: 'Costa Rica' },
+        { subcategories: [], title: 'Indonesia' },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'Mexico Colombia' },
+                { title: 'Mexico Costa Rica' },
+                { title: 'Mexico Indonesia' },
+            ],
+            title: 'Mexico',
+        },
+        { subcategories: [], title: 'Singapore' },
+        { subcategories: [], title: 'South Korea' },
+        { subcategories: [], title: 'Thailand' },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'Turkey Colombia' },
+                { title: 'Turkey Costa Rica' },
+                { title: 'Turkey Indonesia' },
+            ],
+            title: 'Turkey',
+        },
+        {
+            subcategories: [
+                { title: 'New More Locations' },
+                { title: 'More Colombia' },
+                { title: 'More Costa Rica' },
+                { title: 'More Indonesia' },
+            ],
+            title: 'More Locations',
+        },
+    ]; */
+
+// const router = useRouter();
+// function navigate() {
+//     // Modify the full URL condition to avoid appending the suffix recursively
+//     info('DesktopMenu.tsx|ChildrenMenuItem', fullUrl);
+//     // router.push(fullUrl);
+//     router.push(fullUrl.startsWith('/') ? fullUrl : `/${fullUrl}`);
+// }
+// onClick={navigate}
+
+/* function ChildrenMenuItem({
+    menuItem,
+    prefix,
+    suffix = '',
+}: {
+    menuItem: ChildrenMenuItemType;
+    prefix: string;
+    suffix?: string;
+}) {
+    const { id, url, name, subcategories } = menuItem;
+
+    info(menuItem, 'ignore');
+    info(`${prefix}${suffix}/${id}`);
+
+    return (
+        <li className='px-4 py-1 2xl:w-56 hidden 2xl:group-hover:!block group-[.active]:block 2xl:group-[.active]:hidden group children relative'>
+            <Link
+                href={
+                    ('url' in menuItem ? url : `${prefix}${suffix}/${id}`) ||
+                    '#'
+                }
+                className='flex gap-2 py-4 rounded-lg px-3 font-medium text-lg capitalize w-full justify-between items-center bg-slate-50 text-slate-500 border border-solid border-slate-100 hover:bg-slate-100 hover:text-primary hover:fill-primary hover:tracking-wide duration-500'>
+                <span className='leading-3 text-nowrap'>{name}</span>
+                {subcategories && subcategories.length > 0 && (
+                    <i className='block size-3 duration-500 group-[.children:hover]:rotate-90'>
+                        {assets.svg.chevronRight}
+                    </i>
+                )}
+            </Link>
+
+            {Array.isArray(subcategories) && (
+                <div className='hidden group-[.children:hover]:block 2xl:absolute left-56 -top-16'>
+                    <ChildrenMenu
+                        menu={subcategories}
+                        prefix={prefix}
+                        suffix={prefix === 'country' ? '/state' : '/clinic'}
+                    />
+                </div>
+            )}
+        </li>
+    );
+} */
+
+// (typeof url === 'string' &&
+//     url !== '#' &&
+//     url &&
+//     prefix + '/' + id) ||
+// '#'
+
+// // info({ locationIsError, locationIsLoading, locations, locationError });
+// const clinicDoctors = useGetClinicsDoctorsQuery(undefined);
+// info({ clinicDoctors });
+// const {
+//     isError: clinicIsError,
+//     data: clinics,
+//     error: clinicError,
+//     isLoading: clinicIsLoading,
+// } = useGetClinicsQuery(undefined);
+
+// info({ clinicIsError, clinics, clinicError, clinicIsLoading });
+/* const subcategories = [
+        {
+            subcategories: [
+                { title: 'New Locations' },
+                { title: 'Locations Colombia' },
+                { title: 'Locations Costa Rica' },
+                { title: 'Locations Indonesia' },
+            ],
+            title: 'Locations',
+        },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'New Colombia' },
+                { title: 'Colombia Costa Rica' },
+                { title: 'Colombia Indonesia' },
+            ],
+            title: 'Colombia',
+        },
+        { subcategories: [], title: 'Costa Rica' },
+        { subcategories: [], title: 'Indonesia' },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'Mexico Colombia' },
+                { title: 'Mexico Costa Rica' },
+                { title: 'Mexico Indonesia' },
+            ],
+            title: 'Mexico',
+        },
+        { subcategories: [], title: 'Singapore' },
+        { subcategories: [], title: 'South Korea' },
+        { subcategories: [], title: 'Thailand' },
+        {
+            subcategories: [
+                { title: 'Colombia Locations' },
+                { title: 'Turkey Colombia' },
+                { title: 'Turkey Costa Rica' },
+                { title: 'Turkey Indonesia' },
+            ],
+            title: 'Turkey',
+        },
+        {
+            subcategories: [
+                { title: 'New More Locations' },
+                { title: 'More Colombia' },
+                { title: 'More Costa Rica' },
+                { title: 'More Indonesia' },
+            ],
+            title: 'More Locations',
+        },
+    ]; */

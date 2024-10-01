@@ -1,69 +1,37 @@
 'use client';
 import assets from '@/assets';
 import info from '@/assets/info';
-import { useGetCategoriesQuery } from '@/redux/api/apiSlice';
+import {
+    useGetCategoriesQuery,
+    // useGetClinicsDoctorsQuery,
+    // useGetClinicsQuery,
+    useGetLocationsQuery,
+} from '@/redux/api/apiSlice';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function DesktopMenu() {
-    const { isError, data, error, isLoading } =
+    const { isError, error, isLoading, data } =
         useGetCategoriesQuery(undefined);
 
-    info({ isError, data, error, isLoading });
+    const {
+        isError: locationIsError,
+        isLoading: locationIsLoading,
+        error: locationError,
+        data: locations,
+    } = useGetLocationsQuery(undefined);
 
-    const children = [
-        {
-            children: [
-                { title: 'New Locations' },
-                { title: 'Locations Colombia' },
-                { title: 'Locations Costa Rica' },
-                { title: 'Locations Indonesia' },
-            ],
-            title: 'Locations',
-        },
-        {
-            children: [
-                { title: 'Colombia Locations' },
-                { title: 'New Colombia' },
-                { title: 'Colombia Costa Rica' },
-                { title: 'Colombia Indonesia' },
-            ],
-            title: 'Colombia',
-        },
-        { children: [], title: 'Costa Rica' },
-        { children: [], title: 'Indonesia' },
-        {
-            children: [
-                { title: 'Colombia Locations' },
-                { title: 'Mexico Colombia' },
-                { title: 'Mexico Costa Rica' },
-                { title: 'Mexico Indonesia' },
-            ],
-            title: 'Mexico',
-        },
-        { children: [], title: 'Singapore' },
-        { children: [], title: 'South Korea' },
-        { children: [], title: 'Thailand' },
-        {
-            children: [
-                { title: 'Colombia Locations' },
-                { title: 'Turkey Colombia' },
-                { title: 'Turkey Costa Rica' },
-                { title: 'Turkey Indonesia' },
-            ],
-            title: 'Turkey',
-        },
-        {
-            children: [
-                { title: 'New More Locations' },
-                { title: 'More Colombia' },
-                { title: 'More Costa Rica' },
-                { title: 'More Indonesia' },
-            ],
-            title: 'More Locations',
-        },
-    ];
+    info(
+        'useGetCategoriesQuery',
+        { isError, error, isLoading, data },
+        'ignore'
+    );
+    info(
+        'useGetLocationsQuery',
+        { locations, locationIsError, locationIsLoading, locationError },
+        'ignore'
+    );
 
     const [menuActive, setMenuActive] = useState(-1);
     const pathname = usePathname();
@@ -84,28 +52,32 @@ export default function DesktopMenu() {
                     url: '/contact',
                     title: 'Contacts',
                     icon: assets.svg.cardClip,
-                    children: [],
+                    subcategories: [],
+                    prefix: 'contact',
                 },
                 {
                     url: '#',
                     title: 'Locations',
                     icon: assets.svg.locationCrosshair,
-                    children,
+                    subcategories: locations,
+                    prefix: 'country',
                 },
                 {
                     url: '#',
                     title: 'Treatments',
                     icon: assets.svg.gem,
-                    children,
+                    subcategories: data,
+                    prefix: 'treatment',
                 },
                 {
                     url: '#',
                     title: 'More',
                     icon: assets.svg.downLeftAndUpRight,
-                    children: [
-                        { title: 'Contact', url: '/contact' },
-                        { title: 'Report Us', url: '#' },
+                    subcategories: [
+                        { name: 'Contact', url: '/contact' },
+                        { name: 'Report Us', url: '/report' },
                     ],
+                    prefix: 'more',
                 },
             ].map((item, i) => (
                 <li
@@ -138,8 +110,11 @@ export default function DesktopMenu() {
                         )}
                     </button>
 
-                    {item.children.length > 0 && (
-                        <ChildrenMenu menu={item.children} />
+                    {item?.subcategories?.length > 0 && (
+                        <ChildrenMenu
+                            menu={item.subcategories}
+                            prefix={item.prefix}
+                        />
                     )}
                 </li>
             ))}
@@ -148,43 +123,66 @@ export default function DesktopMenu() {
 }
 
 interface ChildrenMenuItemType {
-    title: string;
+    id: number;
+    name: string;
     url?: string;
-    children?: ChildrenMenuItemType[];
+    subcategories?: ChildrenMenuItemType[];
+    prefix: string;
 }
 
 interface ChildrenMenuProps {
     menu: ChildrenMenuItemType[];
+    prefix: string;
+    suffix?: string;
 }
-function ChildrenMenu({ menu }: ChildrenMenuProps) {
+
+function ChildrenMenu({ menu, prefix, suffix }: ChildrenMenuProps) {
     return (
         <ul className='2xl:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 group-hover:py-4'>
             {menu.map((cItem, i) => (
-                <ChildrenMenuItem menuItem={cItem} key={i} />
+                <ChildrenMenuItem
+                    menuItem={cItem}
+                    key={i}
+                    prefix={prefix}
+                    suffix={suffix}
+                />
             ))}
         </ul>
     );
 }
 
-function ChildrenMenuItem({ menuItem }: { menuItem: ChildrenMenuItemType }) {
-    const { url, title, children } = menuItem;
+function ChildrenMenuItem({
+    menuItem,
+    prefix,
+    suffix = '',
+}: {
+    menuItem: ChildrenMenuItemType;
+    prefix: string;
+    suffix?: string;
+}) {
+    const { id, url, name, subcategories } = menuItem;
+    const fullUrl = url || `/${prefix}${suffix ? suffix : ''}/${id}`;
 
     return (
         <li className='px-4 py-1 2xl:w-56 hidden 2xl:group-hover:!block group-[.active]:block 2xl:group-[.active]:hidden group children relative'>
             <Link
-                href={url || '#'}
+                href={fullUrl || '#'}
                 className='flex gap-2 py-4 rounded-lg px-3 font-medium text-lg capitalize w-full justify-between items-center bg-slate-50 text-slate-500 border border-solid border-slate-100 hover:bg-slate-100 hover:text-primary hover:fill-primary hover:tracking-wide duration-500'>
-                <span className='leading-3 text-nowrap'>{title}</span>
-                {children && children.length > 0 && (
+                <span className='leading-3 text-nowrap'>{name}</span>
+                {subcategories && subcategories.length > 0 && (
                     <i className='block size-3 duration-500 group-[.children:hover]:rotate-90'>
                         {assets.svg.chevronRight}
                     </i>
                 )}
             </Link>
 
-            {Array.isArray(children) && (
+            {Array.isArray(subcategories) && subcategories.length > 0 && (
                 <div className='hidden group-[.children:hover]:block 2xl:absolute left-56 -top-16'>
-                    <ChildrenMenu menu={children} />
+                    <ChildrenMenu
+                        menu={subcategories}
+                        prefix={prefix}
+                        suffix={suffix === '' ? '/state' : suffix} // Only append suffix if it's empty
+                    />
                 </div>
             )}
         </li>
