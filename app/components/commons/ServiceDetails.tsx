@@ -1,6 +1,6 @@
 import React from 'react';
 interface ServicesDetailsType {
-    children?: React.ReactNode;
+    description?: string;
     title: string;
     name?: null | string;
 }
@@ -8,7 +8,7 @@ interface ServicesDetailsType {
 export default function ServiceDetails({
     title,
     name = null,
-    children = 'From business cards to banners, HelloPrint offers a wide range of online printing &amp; personalized print products to enhance your brand and marketing efforts, catering to all your professional and personal printing needs.',
+    description = 'From business cards to banners, HelloPrint offers a wide range of online printing &amp; personalized print products to enhance your brand and marketing efforts, catering to all your professional and personal printing needs.',
 }: ServicesDetailsType) {
     return (
         <div className='w-full flex flex-col items-center justify-center'>
@@ -18,9 +18,9 @@ export default function ServiceDetails({
                     <span className='px-1 text-primary font-bold'>{name}</span>
                 )}
             </h1>
-            <p className='max-w-4xl text-center text-sm lg:text-lg leading-4 lg:leading-5 font-suse'>
-                {children}
-            </p>
+            <div className='max-w-4xl text-center text-sm lg:text-lg leading-4 lg:leading-5 font-suse'>
+                {description}
+            </div>
         </div>
     );
 }

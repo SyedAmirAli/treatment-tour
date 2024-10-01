@@ -35,7 +35,7 @@ export default function Root() {
             clinicError,
             clinicIsLoading,
         },
-        'ignore'
+        'ignores'
     );
     info(
         'country/[slug]/page.Tsx',
@@ -46,7 +46,7 @@ export default function Root() {
             countryError,
             countryIsLoading,
         },
-        'ignore'
+        'ignores'
     );
 
     return (
@@ -55,6 +55,7 @@ export default function Root() {
                 <ServiceDetails
                     title={`Find clinics by showing your country  `}
                     name={country?.name}
+                    description={country?.details}
                 />
             </div>
 

@@ -6,15 +6,15 @@ import Intro from './Intro';
 import ViewIntoImages from './ViewIntoImages';
 import Gallery from './Gallery';
 import Appoint from './Appoint';
-import ProcessAndProcedures from './ProcessAndProcedures';
 import Review from './Review';
 import AdditionalServices from './AdditionalServices';
 import Doctors from './Doctors';
 import AfterBefore from './AfterBefore';
 import PaymentService from './PaymentService';
-import OperationHour from './OperationHour';
+// import OperationHour from './OperationHour';
 import Map from './Map';
 import { useGetClinicQuery } from '@/redux/api/apiSlice';
+import Quotes from './Quotes';
 
 export default function ClinicPage() {
     const { slug } = useParams();
@@ -65,22 +65,22 @@ export default function ClinicPage() {
             <Appoint
                 name={data?.name}
                 title={data?.title || ''}
-                description={data?.description || ''}
+                description={data?.details || ''}
             />
 
-            <ProcessAndProcedures />
+            <Quotes clinicId={data?.id} />
 
-            <Review />
+            <Review clinicId={data?.id} />
 
             <AdditionalServices />
 
             <Doctors clinicId={data?.id} />
 
-            <AfterBefore />
+            <AfterBefore clinicId={data?.id} />
 
             <PaymentService />
 
-            <OperationHour />
+            {/* <OperationHour /> */}
 
             <Map embedCode={data?.map_embed_code} />
         </div>

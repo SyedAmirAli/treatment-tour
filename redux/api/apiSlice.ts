@@ -80,10 +80,27 @@ const apiSlice = createApi({
         getClinic: builder.query({
             query: (id: number | string | string[]) => '/clinicsssssss/' + id,
         }),
+        getDoctor: builder.query({
+            query: (id: number | string | string[]) =>
+                `/clinicss/${id}/doctorss`,
+        }),
+        getPortfolios: builder.query({
+            query: (id: number | string | string[]) =>
+                `/clinicss/${id}/portfolioss`,
+        }),
+        getQuotes: builder.query({
+            query: (id: number | string | string[]) =>
+                `/clinicss/${id}/quotess`,
+        }),
+        getReviews: builder.query({
+            query: (id: number | string | string[]) =>
+                `/clinicss/${id}/reviewss`,
+        }),
     }),
 });
 
 export const {
+    useGetReviewsQuery,
     useGetClinicQuery,
     useGetCountryQuery,
     useGetClinicsQuery,
@@ -98,5 +115,9 @@ export const {
     useGetClinicsByTreatmentQuery,
     useGetTreatmentStateQuery,
     useGetClinicsByTreatmentStateQuery,
+    //
+    useGetDoctorQuery,
+    useGetPortfoliosQuery,
+    useGetQuotesQuery,
 } = apiSlice;
 export default apiSlice;

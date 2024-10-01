@@ -55,6 +55,7 @@ export default function Root() {
                 <ServiceDetails
                     title={`Find clinics by showing your country  `}
                     name={treatment?.name}
+                    description={treatment?.details}
                 />
             </div>
 

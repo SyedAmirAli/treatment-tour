@@ -17,3 +17,23 @@ export function asset(endpoint: string = '', slash: boolean = true): string {
 
     return url + (slash ? '/' : '') + endpoint;
 }
+
+export function portfolioAsset(
+    endpoint: string = '',
+    slash: boolean = true
+): string {
+    const url = process.env.NEXT_PUBLIC_MAIN_URL + '/storage/portfolio';
+    if (!url) return endpoint;
+
+    return url + (slash ? '/' : '') + endpoint;
+}
+
+export function doctorAsset(
+    endpoint: string = '',
+    slash: boolean = true
+): string {
+    const url = process.env.NEXT_PUBLIC_MAIN_URL + '/storage/doctors';
+    if (!url) return endpoint;
+
+    return url + (slash ? '/' : '') + endpoint;
+}

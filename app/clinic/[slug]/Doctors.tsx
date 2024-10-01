@@ -1,9 +1,24 @@
-import info from '@/assets/info';
+import info, { asset, doctorAsset } from '@/assets/info';
+import { useGetDoctorQuery } from '@/redux/api/apiSlice';
 import Image from 'next/image';
 import React from 'react';
 
 export default function Doctors({ clinicId }: { clinicId: string }) {
-    info('Doctors.tsx', clinicId);
+    info('Doctors.tsx', clinicId, 'ignore');
+
+    const { isError, isLoading, error, data } = useGetDoctorQuery(clinicId);
+
+    info(
+        'Doctors.tsx',
+        'useGetDoctorQuery',
+        {
+            isError,
+            isLoading,
+            error,
+            data,
+        },
+        'ignore'
+    );
 
     return (
         <div className='w-full py-10 mt-5'>
@@ -12,16 +27,34 @@ export default function Doctors({ clinicId }: { clinicId: string }) {
                 <i className='fa-solid fa-angle-down mr-4'></i>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full'>
-                <Doctor />
-                <Doctor />
-                <Doctor />
-                <Doctor />
+                {data?.map((doctor: DoctorData) => (
+                    <Doctor key={doctor?.id} data={doctor} />
+                ))}
             </div>
         </div>
     );
 }
 
-function Doctor() {
+interface DoctorData {
+    id: number;
+    clinic_id: number;
+    name: string;
+    image: string;
+    experience_years: number;
+    spoken_languages: string;
+    associations: string;
+    education: string;
+    created_at: string;
+    updated_at: string;
+}
+
+interface DoctorProps {
+    data: DoctorData;
+}
+
+function Doctor({ data }: DoctorProps) {
+    info(asset(data.image), 'ignore');
+
     return (
         <div className='w-full bg-white py-4 pl-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] rounded-3xl '>
             <div className='max-h-[600px] overflow-y-scroll overflow-x-hidden rounded-xl has-scrollbar'>
@@ -30,15 +63,17 @@ function Doctor() {
                         <Image
                             width={200}
                             height={200}
-                            alt=''
-                            src='/images/img-1.png'
-                            className=' rounded-full !min-w-40 !min-h-40 !h-40 !w-40'
+                            alt={data.name}
+                            src={doctorAsset(data.image)}
+                            className='rounded-full !min-w-40 !min-h-40 !h-40 !w-40'
                         />
                     </figure>
                     <div className='w-full'>
-                        <h3 className='text-xl font-bold py-4'>Dhario Juris</h3>
+                        <h3 className='text-xl font-bold py-4'>{data.name}</h3>
                         <p className='px-2'>
-                            <strong className='pr-2'>26</strong>
+                            <strong className='pr-2'>
+                                {data.experience_years}
+                            </strong>
                             <span>Years Of Experience</span>
                         </p>
                     </div>
@@ -55,15 +90,13 @@ function Doctor() {
                             </span>
                         </p>
                         <div className='px-4 p-2 pt-1'>
-                            {'English,Spanish,Portuguese'
-                                .split(',')
-                                .map((lang, i) => (
-                                    <p
-                                        key={i}
-                                        className='font-medium text-slate-600'>
-                                        {lang}
-                                    </p>
-                                ))}
+                            {data.spoken_languages.split(',').map((lang, i) => (
+                                <p
+                                    key={i}
+                                    className='font-medium text-slate-600'>
+                                    {lang}
+                                </p>
+                            ))}
                         </div>
                     </div>
 
@@ -77,11 +110,7 @@ function Doctor() {
                             </span>
                         </p>
                         <div className='px-4 p-2 pt-1 text-md leading-6'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Sed dignissimos <br />
-                            necessitatibus itaque fugiat iste nam ad quasi, rem,
-                            iure sit quaerat maxime. <br /> Dolor deleniti
-                            voluptate tempore pariatur est dolorum quisquam.
+                            {data.associations}
                         </div>
                     </div>
 
@@ -95,21 +124,7 @@ function Doctor() {
                             </span>
                         </p>
                         <div className='px-4 p-2 pt-1 text-pretty'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Voluptatum recusandae perspiciatis ullam
-                            voluptatibus fuga nulla, temporibus. <br /> A nam
-                            nostrum assumenda quisquam mollitia quis explicabo
-                            voluptatem voluptate quam id ut error aperiam?
-                            Illum, odio saepe. <br /> nostrum magnam expedita
-                            nobis itaque, alias natus necessitatibus velit aut.
-                            Nemo, sapiente natus, iure nihil assumenda iste
-                            totam veritatis deleniti nulla magnam saepe <br />
-                            iusto vitae unde officia! Numquam voluptatem quis
-                            cupiditate exercitationem. Molestias delectus
-                            nesciunt architecto excepturi dolores repellendus
-                            repellat non corporis iste! Voluptates sit explicabo
-                            ex doloremque modi iste, eligendi blanditiis. Natus
-                            odit deleniti praesentium consequatur!
+                            {data.education}
                         </div>
                     </div>
                 </div>
