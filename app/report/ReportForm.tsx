@@ -1,49 +1,91 @@
-import React from 'react';
+'use client';
+import info from '@/assets/info';
+import { useSaveReportMutation } from '@/redux/api/apiSlice';
+import React, { useEffect, useState } from 'react';
+import Loading from '../components/commons/Loading';
 
 export default function ReportForm() {
+    const [form, setForm] = useState<{
+        title: string;
+        description: string;
+    }>({
+        title: '',
+        description: '',
+    });
+
+    const [
+        saveReport,
+        {
+            isLoading: reportIsLoading,
+            data: reportData,
+            error: reportIsError,
+            isSuccess,
+        },
+    ] = useSaveReportMutation(undefined);
+
+    function formHandler(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        saveReport(form);
+        info(form);
+    }
+
+    useEffect(
+        function () {
+            if (isSuccess) {
+                alert('Your report information added successfully!');
+                setForm({ title: '', description: '' });
+            }
+
+            if (reportIsError) {
+                alert('Failed to add report information!');
+            }
+        },
+        [reportIsError, isSuccess]
+    );
+
+    info('useSaveReportMutation', {
+        reportIsLoading,
+        reportData,
+        reportIsError,
+    });
+
     return (
         <form
-            action=''
+            onSubmit={formHandler}
             className='w-full bg-white mb-0 mt-10 lg:my-10 p-8 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)]'>
-            <div className='w-full flex flex-col sm:flex-row justify-between gap-6'>
-                <div className='flex flex-col w-full gap-0.5'>
-                    <label
-                        htmlFor='first_name'
-                        className='font-bold font-comfortaa'>
-                        First Name
-                    </label>
-                    <input
-                        type='text'
-                        name='first_name'
-                        id='first_name'
-                        placeholder='e.g. Jhon'
-                        className='border border-solid font-comfortaa px-3 py-2 border-slate-300 rounded-md focus:outline-primary-main text-slate-900'
-                    />
-                </div>
-                <div className='flex flex-col w-full gap-0.5'>
-                    <label
-                        htmlFor='last_name'
-                        className='font-bold font-comfortaa'>
-                        Last Name
-                    </label>
-                    <input
-                        type='text'
-                        name='last_name'
-                        id='last_name'
-                        placeholder='e.g. Doe'
-                        className='border border-solid font-comfortaa px-3 py-2 border-slate-300 rounded-md focus:outline-primary-main text-slate-900'
-                    />
-                </div>
+            <div className='flex flex-col w-full gap-0.5'>
+                {reportIsLoading && <Loading />}
+
+                <label htmlFor='title' className='font-bold font-comfortaa'>
+                    Title
+                </label>
+                <input
+                    type='text'
+                    name='title'
+                    id='title'
+                    value={form.title}
+                    onChange={(e) =>
+                        setForm({ ...form, title: e.target.value })
+                    }
+                    placeholder='e.g. Jhon'
+                    className='border border-solid font-comfortaa px-3 py-2 border-slate-300 rounded-md focus:outline-primary-main text-slate-900'
+                />
             </div>
 
             <div className='flex flex-col w-full gap-0.5 mt-4'>
-                <label htmlFor='message' className='font-bold font-comfortaa'>
+                <label
+                    htmlFor='description'
+                    className='font-bold font-comfortaa'>
                     Message
                 </label>
                 <textarea
                     rows={4}
-                    name='message'
-                    id='message'
+                    name='description'
+                    id='description'
+                    value={form.description}
+                    onChange={(e) =>
+                        setForm({ ...form, title: e.target.value })
+                    }
                     placeholder="Write here what's on your mind say..."
                     className='border border-solid font-comfortaa px-3 py-2 border-slate-300 rounded-md focus:outline-primary-main text-slate-900'></textarea>
             </div>
@@ -76,7 +118,7 @@ export default function ReportForm() {
 
             <div className='w-full mt-2'>
                 <button className='w-full py-2 bg-slate-900 duration-500 hover:tracking-wide hover:bg-black text-white rounded-md pb-2.5 font-bold font-comfortaa'>
-                    Send Message
+                    Report Us
                 </button>
             </div>
         </form>

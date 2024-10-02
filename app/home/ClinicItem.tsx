@@ -21,21 +21,7 @@ export interface ClinicItemType {
 }
 
 export default function ClinicItem({ clinic }: { clinic: ClinicItemType }) {
-    const {
-        id,
-        name,
-        // description,
-        address,
-        main_image,
-        // gallery_images,
-        // map_embed_code,
-        // country_id,
-        // state_id,
-        // created_at,
-        // country,
-        // state,
-        average_rating,
-    } = clinic;
+    const { id, name, address, main_image, average_rating } = clinic;
 
     const type = id % 2 === 0 ? 'premium' : 'new';
 
@@ -48,6 +34,7 @@ export default function ClinicItem({ clinic }: { clinic: ClinicItemType }) {
                     src={asset(main_image)}
                     alt={name}
                     fill
+                    unoptimized
                     className='rounded-t-xl duration-500 hover:scale-105 object-cover'
                 />
 

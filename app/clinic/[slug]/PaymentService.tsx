@@ -28,7 +28,6 @@ export default function PaymentService() {
                                     className='duration-500 hover:scale-105 object-cover'
                                     src={img}
                                     alt={i + '-img'}
-                                    // fill
                                     width={100}
                                     height={100}
                                 />

@@ -1,7 +1,9 @@
 import React from 'react';
-import { breadcrumb } from '@/static/footer.json';
+import footerData from '@/static/footer.json';
 
 export default function FooterTitle() {
+    const { breadcrumb } = footerData;
+
     return (
         <div className='container'>
             <div className='w-full flex flex-col items-center justify-center pt-10'>

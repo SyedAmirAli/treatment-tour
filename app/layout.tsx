@@ -29,12 +29,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en' suppressHydrationWarning={true}>
-            <Script
-                // strategy='beforeInteractive'
-                // src='https://kit.fontawesome.com/11e3e6af90.js'
-                // crossOrigin='anonymous'
-                src='/js/font-awesome.js'
-            />
+            <Script src='/js/font-awesome.js' />
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <StoreProvider>
@@ -45,12 +40,3 @@ export default function RootLayout({
         </html>
     );
 }
-
-// declare global{
-//     interface Window{
-//         asset:function (endpoint='', slash =true) {
-//             return process.env.NEXT_PUBLIC_MAIN_URL + '/'+endpoint;
-//         }
-//     }
-// }
-// global.d.ts

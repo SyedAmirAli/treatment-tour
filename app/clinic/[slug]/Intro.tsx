@@ -19,7 +19,7 @@ export default function Intro({
             <div className='flex gap-3 justify-between'>
                 <div className='left'>
                     <h1 className='font-bold text-4xl mb-2'>{name}</h1>
-                    <div className='flex gap-2 items-center justify-center'>
+                    <div className='flex gap-2 items-center sm:items-start justify-center sm:justify-start'>
                         <span className='text-primary'>
                             <i className='fa-solid fa-star'></i>
                         </span>

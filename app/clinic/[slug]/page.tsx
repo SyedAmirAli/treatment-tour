@@ -15,6 +15,7 @@ import PaymentService from './PaymentService';
 import Map from './Map';
 import { useGetClinicQuery } from '@/redux/api/apiSlice';
 import Quotes from './Quotes';
+import Loading from '@/app/components/commons/Loading';
 
 export default function ClinicPage() {
     const { slug } = useParams();
@@ -29,7 +30,7 @@ export default function ClinicPage() {
         data,
     });
 
-    if (isLoading) return 'Loading...';
+    if (isLoading) return <Loading />;
 
     if (!isLoading && isError) {
         if (typeof error === 'object' && error !== null && 'data' in error) {

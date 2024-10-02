@@ -1,9 +1,11 @@
 import React from 'react';
 import ServicesItem from './ServicesItem';
 import ServiceDetails from '../components/commons/ServiceDetails';
-import { services } from '@/static/homepage.json';
+import homepageData from '@/static/homepage.json';
 
 export default function Services() {
+    const { services } = homepageData;
+
     return (
         <div className='container pb-5 lg:py-10'>
             <ServiceDetails title='Why choose Our' name='Treatment Tour' />

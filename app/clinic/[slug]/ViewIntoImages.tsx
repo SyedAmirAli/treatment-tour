@@ -25,8 +25,8 @@ export default function ViewIntoImages({
                             className='rounded-t-xl w-full object-cover h-[76vh]'
                             src={asset(activeImg)}
                             alt='activeImg'
-                            height={100}
-                            width={100}
+                            height={1080}
+                            width={1920}
                         />
 
                         <button

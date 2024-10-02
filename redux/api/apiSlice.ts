@@ -97,6 +97,26 @@ const apiSlice = createApi({
             query: (id: number | string | string[]) =>
                 `/clinicss/${id}/reviewss`,
         }),
+
+        searchClinics: builder.mutation({
+            query: (value: string) => `clinics/search?q=${value}`,
+        }),
+
+        saveContact: builder.mutation({
+            query: (body: object) => ({
+                method: 'POST',
+                url: '/contacts',
+                body,
+            }),
+        }),
+
+        saveReport: builder.mutation({
+            query: (body: object) => ({
+                method: 'POST',
+                url: '/reports',
+                body,
+            }),
+        }),
     }),
 });
 
@@ -121,5 +141,10 @@ export const {
     useGetDoctorQuery,
     useGetPortfoliosQuery,
     useGetQuotesQuery,
+
+    //mutations
+    useSearchClinicsMutation,
+    useSaveContactMutation,
+    useSaveReportMutation,
 } = apiSlice;
 export default apiSlice;

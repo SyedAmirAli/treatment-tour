@@ -11,7 +11,7 @@ export default function AdditionalServices() {
                     <i className='fa-solid fa-angle-down mr-4'></i>
                 </div>
                 <div className='flex border-t border-solid border-slate-300 mt-3'>
-                    <ul className='flex justify-between w-full mt-4'>
+                    <ul className='inline sm:flex justify-between w-full mt-4'>
                         <li className='font-medium'>
                             <i className='fa-solid fa-stethoscope mr-2'></i>
                             Free Exam

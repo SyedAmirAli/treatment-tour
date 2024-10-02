@@ -4,7 +4,7 @@ import FooterTitle from './FooterTitle';
 
 export default function Footer() {
     return (
-        <footer className='w-full flex items-center justify-center flex-col gap-4 border-t border-solid border-slate-300'>
+        <footer className='w-full flex items-center justify-center flex-col gap-4 border-t border-solid border-slate-300 px-2'>
             <FooterTitle />
             <FooterItem />
         </footer>

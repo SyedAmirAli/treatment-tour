@@ -1,3 +1,4 @@
+import Loading from '@/app/components/commons/Loading';
 import StarRating from '@/app/components/commons/StarRating';
 import info from '@/assets/info';
 import { useGetReviewsQuery } from '@/redux/api/apiSlice';
@@ -22,7 +23,7 @@ export default function Review({ clinicId }: { clinicId: string }) {
     );
 
     // Loading and Error states
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <Loading />;
     if (isError) return <p>Something went wrong!</p>;
 
     // Data render
@@ -31,7 +32,7 @@ export default function Review({ clinicId }: { clinicId: string }) {
             <div className='mt-6 w-full'>
                 <h2 className='mt-4 text-3xl font-semibold'>Reviews</h2>
 
-                <div className='flex w-full justify-between'>
+                <div className='flex flex-col md:flex-row w-full justify-between'>
                     <div className='flex mt-5 mb-6'>
                         <i className='fa-solid fa-star'>
                             <span className='ml-1 font-sans font-medium text-lg'>
@@ -111,6 +112,7 @@ export default function Review({ clinicId }: { clinicId: string }) {
         </div>
     );
 }
+
 interface ReviewType {
     id: number;
     clinic_id: number;

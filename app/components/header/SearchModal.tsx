@@ -1,12 +1,85 @@
 'use client';
 import assets from '@/assets';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setSearch } from '@/redux/slices/HeaderSlice';
-import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+// import demoSearchResult from '@/static/demo-search-result.json';
+import info from '@/assets/info';
+import {
+    useGetClinicsQuery,
+    useSearchClinicsMutation,
+} from '@/redux/api/apiSlice';
+import Loading from '../commons/Loading';
+import SearchItemCard from './SearchItemCard';
+
+interface ClinicDetails {
+    id: number;
+    name: string;
+    description: string;
+    address: string;
+    main_image: string;
+    gallery_images: string[]; // Assuming it's a parsed array of image strings
+    map_embed_code: string;
+    country_id: number;
+    state_id: number;
+    created_at: string; // ISO date format
+    country: string;
+    state: string;
+    average_rating: number;
+    total_rating?: number;
+    caption?: string;
+}
 
 export default function SearchModal() {
     const dispatch = useAppDispatch();
+    const [filteredClinics, setFilteredClinics] = useState<ClinicDetails[]>([]);
+    const { query } = useAppSelector((state) => state.header.search);
+
+    const {
+        isLoading,
+        isError,
+        error,
+        data: clinics,
+    } = useGetClinicsQuery(undefined);
+
+    const [
+        searchClinic,
+        { isLoading: isSearchLoading, data: searchData, isSuccess },
+    ] = useSearchClinicsMutation();
+
+    useEffect(() => {
+        if (Array.isArray(clinics) && query.trim() !== '') {
+            const lowerCaseQuery = query.toLowerCase();
+            setFilteredClinics(
+                clinics.filter((clinic: ClinicDetails) =>
+                    clinic.name.toLowerCase().includes(lowerCaseQuery)
+                )
+            );
+        } else {
+            setFilteredClinics([]);
+        }
+    }, [clinics, query]);
+
+    useEffect(() => {
+        if (isSuccess && Array.isArray(searchData)) {
+            setFilteredClinics(searchData);
+        }
+    }, [searchData, isSuccess]);
+
+    info(
+        'SearchModal.tsx',
+        'useGetClinicQuery',
+        {
+            isLoading,
+            isError,
+            error,
+            clinics,
+            searchData,
+        },
+        'ignores'
+    );
+
+    info(query);
 
     function closeSearchModal() {
         dispatch(setSearch({ status: false }));
@@ -15,12 +88,23 @@ export default function SearchModal() {
         dispatch(setSearch({ query: event.target.value }));
     }
 
+    async function searchHandler(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        searchClinic(query);
+    }
+
     return (
-        <div className='fixed top-0 flex items-center justify-center left-0 w-full h-screen bg-black/10 z-20 px-2'>
+        <div className='fixed z-20 top-0 flex items-center justify-center left-0 w-full h-screen bg-black/10 px-2'>
+            {(isLoading || isSearchLoading) && <Loading />}
+
             <div className='max-w-xl bg-white p-6 w-full border border-solid border-slate-300 rounded-xl'>
-                <form className='w-full border-b border-solid border-slate-300 mb-2 pb-5'>
+                <form
+                    onSubmit={searchHandler}
+                    className='w-full border-b border-solid border-slate-300 mb-2 pb-5'>
                     <div className='w-full flex items-center justify-center'>
                         <input
+                            value={query}
                             onChange={searchQueryHandler}
                             type='search'
                             placeholder='Find your target'
@@ -38,7 +122,7 @@ export default function SearchModal() {
                     <div className='flex w-full justify-between items-center'>
                         <h1 className='text-xl font-medium'>
                             <span className='text-primary font-bold pr-2'>
-                                36
+                                {filteredClinics.length || 'No'}
                             </span>
                             Results found in your search.
                         </h1>
@@ -53,133 +137,17 @@ export default function SearchModal() {
                         </button>
                     </div>
 
-                    <div className='w-full mt-3 max-h-[50vh] overflow-y-scroll scrollbar-primary'>
-                        {[
-                            {
-                                id: 1,
-                                title: 'Radiant Pharmaceuticals',
-                                url: '#',
-                                caption: 'best seller',
-                                rating: 5,
-                                totalRating: 19,
-                            },
-                            {
-                                id: 2,
-                                title: 'Squire Pharmaceuticals',
-                                url: '#',
-                                caption: null,
-                                rating: 2,
-                                totalRating: 30,
-                            },
-                            {
-                                id: 3,
-                                title: 'Eskayef Pharmaceuticals',
-                                url: '#',
-                                caption: 'popular',
-                                rating: 3,
-                                totalRating: 99,
-                            },
-                            {
-                                id: 4,
-                                title: 'Renata Pharmaceuticals',
-                                url: '#',
-                                caption: null,
-                                rating: 4,
-                                totalRating: 25,
-                            },
-                            {
-                                id: 5,
-                                title: 'Beximco Pharmaceuticals',
-                                url: '#',
-                                caption: 'top rated',
-                                rating: 2,
-                                totalRating: 1000,
-                            },
-                            {
-                                id: 6,
-                                title: 'ACI Pharmaceuticals',
-                                url: '#',
-                                caption: null,
-                                rating: 5,
-                                totalRating: 1244,
-                            },
-                            {
-                                id: 7,
-                                title: 'Square Pharmaceuticals',
-                                url: '#',
-                                caption: 'best seller',
-                                rating: 1,
-                                totalRating: 31,
-                            },
-                            {
-                                id: 8,
-                                title: 'Incepta Pharmaceuticals',
-                                url: '#',
-                                caption: 'popular',
-                                rating: 4,
-                                totalRating: 19,
-                            },
-                            {
-                                id: 9,
-                                title: 'Aristopharma Pharmaceuticals',
-                                url: '#',
-                                caption: null,
-                                rating: 2,
-                                totalRating: 20,
-                            },
-                            {
-                                id: 10,
-                                title: 'Opsonin Pharmaceuticals',
-                                url: '#',
-                                caption: 'top rated',
-                                rating: 5,
-                                totalRating: 5,
-                            },
-                        ].map((item) => (
-                            <div key={item.id} className='pr-4 py-2'>
-                                <div className='w-full bg-slate-50 border border-solid border-slate-200 rounded-xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] py-2 px-4'>
-                                    <div className='w-full flex items-center justify-between'>
-                                        <h3 className='text-lg font-medium text-slate-700'>
-                                            {item.title}
-
-                                            {item.caption && (
-                                                <span className='px-2 rounded-full ml-3 bg-blue-500 text-slate-100 pb-0.5 font-medium text-xs tracking-wide capitalize'>
-                                                    {item.caption}
-                                                </span>
-                                            )}
-                                        </h3>
-                                        <div className='mb-1 flex gap-0.5 fill-primary items-center justify-center'>
-                                            {new Array(5)
-                                                .fill(0)
-                                                .map((_, i) => (
-                                                    <i
-                                                        key={i}
-                                                        className='block size-4'>
-                                                        {
-                                                            assets.svg[
-                                                                i >= item.rating
-                                                                    ? 'star'
-                                                                    : 'starFill'
-                                                            ]
-                                                        }
-                                                    </i>
-                                                ))}
-
-                                            <p className='pl-2 text-sm font-medium text-slate-500 tracking-wide'>
-                                                ({item.totalRating})
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <Link
-                                        href='#'
-                                        className='text-sm leading-[1.3] pt-1 duration-300 hover:text-blue-500 block hover:underline'>
-                                        Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit. Nulla voluptatum
-                                        corporis blanditiis dicta? Nam ut
-                                        eveniet nisi sed consequuntur .
-                                    </Link>
-                                </div>
-                            </div>
+                    <div className='w-full mt-3 max-h-[50vh] overflow-y-scroll sm:scrollbar-primary'>
+                        {filteredClinics.map((clinic: ClinicDetails) => (
+                            <SearchItemCard
+                                key={clinic.id}
+                                id={clinic.id}
+                                rating={clinic.average_rating}
+                                title={clinic.name}
+                                totalRating={clinic?.total_rating || 0}
+                                caption={clinic?.caption || ''}
+                                description={clinic.description}
+                            />
                         ))}
                     </div>
                 </div>
