@@ -3,6 +3,7 @@ import ServiceDetails from '../components/commons/ServiceDetails';
 import { useGetClinicsQuery } from '@/redux/api/apiSlice';
 import info from '@/assets/info';
 import ClinicItem, { ClinicItemType } from './ClinicItem';
+import Loading from '../components/commons/Loading';
 
 export default function ClinicCard() {
     const {
@@ -14,6 +15,7 @@ export default function ClinicCard() {
 
     info(
         'ElementCard.Tsx',
+        'useGetClinicsQuery',
         {
             clinicIsError,
             clinics,
@@ -22,6 +24,8 @@ export default function ClinicCard() {
         },
         'ignore'
     );
+
+    if (clinicIsLoading) return <Loading />;
 
     return (
         <div className='container py-6 flex items-center justify-center flex-wrap gap-8 px-3 sm:px-0'>

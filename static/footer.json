@@ -1,0 +1,85 @@
+{
+    "breadcrumb": {
+        "title": "Online Medicare Services with",
+        "highlighter": "Treatment Tour",
+        "description": "From business cards to banners, HelloPrint offers a wide range of online printing &amp; personalised print products to enhance your brand and marketing efforts, catering to all your professional and personal printing needs."
+    },
+    "details": {
+        "image": "/images/footer-logo.jpg",
+        "summery": "Sed ut perspiciatis unde omnis natus voluptatem accusa accusa ntiumy doloremque laudantium.",
+        "placeholder": "e.g. example@gmail.com",
+        "actionUrl": "#",
+        "nav": {
+            "title": "Company",
+            "data": [
+                {
+                    "id": 1,
+                    "icon": "<i class='fa-solid fa-angles-right text-primary'></i>",
+                    "url": "#",
+                    "title": "About Us"
+                },
+                {
+                    "id": 2,
+                    "icon": "<i class='fa-solid fa-angles-right text-primary'></i>",
+                    "url": "#",
+                    "title": "Company History"
+                },
+                {
+                    "id": 3,
+                    "icon": "<i class='fa-solid fa-angles-right text-primary'></i>",
+                    "url": "#",
+                    "title": "Need a Career"
+                },
+                {
+                    "id": 4,
+                    "icon": "<i class='fa-solid fa-angles-right text-primary'></i>",
+                    "url": "#",
+                    "title": "Working Process"
+                }
+            ]
+        }
+    },
+    "bottomBreadcrumb": {
+        "socialIcons": {
+            "facebook": "<i class='fa-brands fa-facebook'></i>",
+            "instagram": "<i class='fa-brands fa-instagram'></i>",
+            "twitter": "<i class='fa-brands fa-x-twitter'></i>",
+            "linkedin": "<i class='fa-brands fa-linkedin'></i>"
+        },
+
+        "copyright": {
+            "name": "@Copyright",
+            "title": "All right reserved by",
+            "actionName": "Treatment Tour",
+            "actionUrl": "#",
+            "actionTarget": "_blank"
+        },
+
+        "social": [
+            {
+                "name": "Facebook",
+                "url": "#",
+                "icon": "<i class='fa-brands fa-facebook'></i>",
+                "target": "_blank"
+            },
+            {
+                "name": "Instagram",
+                "url": "#",
+                "icon": "<i class='fa-brands fa-instagram'></i>",
+                "target": "_blank"
+            },
+            {
+                "name": "Twitter",
+                "url": "#",
+                "icon": "<i class='fa-brands fa-x-twitter'></i>",
+                "target": "_blank"
+            },
+            {
+                "name": "Linkedin",
+                "url": "#",
+                "icon": "<i class='fa-brands fa-linkedin'></i>",
+                "target": "_blank"
+            }
+        ]
+    }
+}

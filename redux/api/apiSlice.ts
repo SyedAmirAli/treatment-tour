@@ -37,6 +37,7 @@ const apiSlice = createApi({
         >
     ) => ({
         getClinics: builder.query({ query: () => '/clinicsssssss' }),
+        getFeaturedGallery: builder.query({ query: () => '/featuredonss' }),
         getCategories: builder.query({ query: () => '/categoriess' }),
         getLocations: builder.query({ query: () => '/countriess' }),
         getClinicsDoctors: builder.query({
@@ -100,6 +101,7 @@ const apiSlice = createApi({
 });
 
 export const {
+    useGetFeaturedGalleryQuery,
     useGetReviewsQuery,
     useGetClinicQuery,
     useGetCountryQuery,
