@@ -1,0 +1,85 @@
+{
+    "utilities": {
+        "title": "Contact with us",
+        "summery": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto atque a, aspernatur illum iste cupiditate? Id libero eos, tempora praesentium saepe doloribus."
+    },
+    "information": {
+        "line": "---------",
+        "name": "Contact",
+        "details": [
+            {
+                "id": 1,
+                "title": "Contact with us",
+                "summery": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt fugit dignissimos, provident dolore iste tenetur quod id in consequuntur reiciendis ipsum cumque aspernatur.",
+                "items": [
+                    {
+                        "title": "Start a live chat",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-paper-plane'></i>"
+                    },
+                    {
+                        "title": "Short us an email",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-envelope-open-text'></i>"
+                    },
+                    {
+                        "title": "Message us on X",
+                        "url": "#",
+                        "icon": "<i class='fa-brands fa-x-twitter'></i>"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Call us",
+                "summery": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                "items": [
+                    {
+                        "title": "BD | (+880) 18-807594",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-phone-volume'></i>"
+                    },
+                    {
+                        "title": "009 5568 9087",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-phone-slash'></i>"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Visit us",
+                "summery": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                "items": [
+                    {
+                        "title": "09:30 AM - 07:30 PM (Office Hour)",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-timeline'></i>"
+                    },
+                    {
+                        "title": "100 Smith Street, Collingwood VIC 3066",
+                        "url": "#",
+                        "icon": "<i class='fa-solid fa-hotel'></i>"
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "View us in Maps",
+                "summery": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                "items": [
+                    {
+                        "title": "https://maps.app.goo.gl/THUMqQbQZgdbJid67",
+                        "url": "https://maps.app.goo.gl/THUMqQbQZgdbJid67",
+                        "icon": "<i class='fa-solid fa-location-dot'></i>"
+                    },
+                    {
+                        "title": "https://maps.app.goo.gl/THUMqQbQZgdbJid67",
+                        "url": "https://maps.app.goo.gl/THUMqQbQZgdbJid67",
+                        "icon": "<i class='fa-solid fa-location-pin-lock'></i>"
+                    }
+                ]
+            }
+        ]
+    }
+}

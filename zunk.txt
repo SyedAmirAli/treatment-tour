@@ -1104,3 +1104,14 @@ function CategoryBannerItem({
                 //     }
                 // }
                 // global.d.ts
+                {/* <div className='flex gap-3 py-0.5 group -mt-1'>
+                    <span className='text-lg text-slate-600 duration-500 group-hover:text-primary'>
+                        <i className='fa-solid fa-location-pin-lock'></i>
+                    </span>
+                    <Link
+                        href='https://maps.app.goo.gl/THUMqQbQZgdbJid67'
+                        target='_blank'
+                        className='font-suse break-all font-bold text-slate-600 duration-500 group-hover:text-primary group-hover:tracking-wide underline'>
+                        https://maps.app.goo.gl/THUMqQbQZgdbJid67
+                    </Link>
+                </div> */}

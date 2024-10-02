@@ -4,7 +4,11 @@ import { useSaveReportMutation } from '@/redux/api/apiSlice';
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/commons/Loading';
 
-export default function ReportForm() {
+export default function ReportForm({
+    utilities,
+}: {
+    utilities: { services: string[] };
+}) {
     const [form, setForm] = useState<{
         title: string;
         description: string;
@@ -93,16 +97,7 @@ export default function ReportForm() {
             <div className='w-full mt-8'>
                 <h4 className='font-bold font-suse'>Report About</h4>
                 <div className='flex flex-wrap items-center justify-between gap-y-3 p-4'>
-                    {[
-                        'Violence',
-                        'Misuse',
-                        'Unless Warning',
-                        'Sexual Abuse',
-                        'Harassment',
-                        'Political Issue',
-                        'Un Importunacy',
-                        'Non Procedural',
-                    ].map((item, index) => (
+                    {utilities.services.map((item, index) => (
                         <label
                             key={index}
                             className='flex gap-2 text-sm font-comfortaa font-bold w-1/2 lg:w-1/3 xl:w-1/4'>
