@@ -20,7 +20,7 @@ export default function CategoryBanner() {
 
     return (
         <div className='container'>
-            <div className='flex flex-wrap items-center justify-center gap-5 py-5'>
+            <div className='flex flex-wrap sm:items-center justify-center gap-2.5 px-2 sm:gap-5 py-5'>
                 {data?.map((content: CategoryBannerItemType) => (
                     <CategoryBannerItem
                         key={content.id}
@@ -49,7 +49,7 @@ function CategoryBannerItem({
     return (
         <Link
             href={`/treatment/${id}`}
-            className='bg-white p-4 flex flex-col items-center justify-self-center   shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] rounded-3xl duration-500
+            className='w-[47%] sm:w-auto bg-white p-4 flex flex-col items-center justify-self-center shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] rounded-3xl duration-500
             hover:scale-110 group'>
             <Image
                 width={60}

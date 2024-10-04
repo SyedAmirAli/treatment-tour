@@ -117,6 +117,14 @@ const apiSlice = createApi({
                 body,
             }),
         }),
+
+        bookAppointment: builder.mutation({
+            query: (body: object) => ({
+                url: '/appointments',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 
@@ -146,5 +154,6 @@ export const {
     useSearchClinicsMutation,
     useSaveContactMutation,
     useSaveReportMutation,
+    useBookAppointmentMutation,
 } = apiSlice;
 export default apiSlice;

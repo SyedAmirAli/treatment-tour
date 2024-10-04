@@ -1,6 +1,8 @@
+'use client';
+import Loading from '@/app/components/commons/Loading';
 import info from '@/assets/info';
 import { useGetQuotesQuery } from '@/redux/api/apiSlice';
-import Link from 'next/link';
+import { useState } from 'react';
 
 interface ReviewData {
     id: number;
@@ -28,7 +30,9 @@ export default function Quotes({ clinicId }: { clinicId: string }) {
         'ignore'
     );
 
-    if (isLoading) return <p>Loading...</p>;
+    const [isQuote, setIsQuote] = useState(false);
+
+    if (isLoading) return <Loading />;
     if (isError) return <p>Error loading reviews</p>;
 
     return (
@@ -37,52 +41,54 @@ export default function Quotes({ clinicId }: { clinicId: string }) {
                 <h1 className='text-3xl font-semibold'>
                     Prices and Procedures
                 </h1>
-                <Link
-                    href='#'
-                    className='shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] border border-solid border-slate-300 uppercase tracking-wide text-primary hover:bg-primary hover:text-white duration-500 hover:tracking-wider p-2 bg-white font-medium rounded-lg text-lg text-center mr-6 mt-4'>
-                    Get Qoute
-                </Link>
+                <button
+                    onClick={() => setIsQuote(!isQuote)}
+                    className='shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] border border-solid border-slate-300 uppercase tracking-wide text-primary hover:bg-primary hover:text-white duration-500 hover:tracking-wider p-2 bg-white font-medium rounded-lg text-lg text-center sm:mr-6 mt-4'>
+                    Get Quote
+                </button>
             </div>
 
             {/* Review Table with Header */}
-            <div className='flex w-full'>
-                <table className='table-fixed w-full mt-10 mb-10'>
-                    <thead className='border border-solid border-slate-300 w-full'>
-                        <tr className='border border-solid border-slate-300'>
-                            <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
-                                Name
-                            </th>
-                            <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
-                                Procedure
-                            </th>
-                            <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
-                                Price
-                            </th>
-                            <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
-                                Duration
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((review: ReviewData) => (
-                            <tr key={review.id}>
-                                <td className='p-4 font-medium border border-solid border-slate-300'>
-                                    {review.name}
-                                </td>
-                                <td className='p-4 font-medium border border-solid border-slate-300'>
-                                    {review.procedure}
-                                </td>
-                                <td className='p-4 font-medium border border-solid border-slate-300'>
-                                    ${review.price}
-                                </td>
-                                <td className='p-4 font-medium border border-solid border-slate-300'>
-                                    {review.duration} hours
-                                </td>
+            {isQuote && (
+                <div className='flex w-full'>
+                    <table className='table-fixed w-full mt-10 mb-10'>
+                        <thead className='border border-solid border-slate-300 w-full'>
+                            <tr className='border border-solid border-slate-300'>
+                                <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
+                                    Name
+                                </th>
+                                <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
+                                    Procedure
+                                </th>
+                                <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
+                                    Price
+                                </th>
+                                <th className='border border-solid border-slate-300 p-4 font-bold text-left'>
+                                    Duration
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {data.map((review: ReviewData) => (
+                                <tr key={review.id}>
+                                    <td className='p-4 font-medium border border-solid border-slate-300'>
+                                        {review.name}
+                                    </td>
+                                    <td className='p-4 font-medium border border-solid border-slate-300'>
+                                        {review.procedure}
+                                    </td>
+                                    <td className='p-4 font-medium border border-solid border-slate-300'>
+                                        ${review.price}
+                                    </td>
+                                    <td className='p-4 font-medium border border-solid border-slate-300'>
+                                        {review.duration}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,15 +1,18 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useState } from 'react';
+import BookAppointModal from './BookAppointModal';
+import ContactClinicModal from './ContactClinicModal';
 interface AppointProps {
-    name: string | undefined; // Assuming name can be a string or undefined
-    title: string; // title defaults to an empty string, so it's a string
-    description: string; // description defaults to an empty string, so it's a string
+    name: string | undefined;
+    title: string;
+    description: string;
 }
 
 const Appoint: React.FC<AppointProps> = ({ name, title, description }) => {
     const [isShow, setIsShow] = useState(false);
+    const [isShowAppoint, setIsShowAppoint] = useState(false);
+    const [isContactAppoint, setIsContactAppoint] = useState(false);
 
     return (
         <div className='flex flex-col lg:flex-row justify-self-end'>
@@ -31,20 +34,30 @@ const Appoint: React.FC<AppointProps> = ({ name, title, description }) => {
                         dangerouslySetInnerHTML={{ __html: description }}></div>
                 )}
             </div>
-            <div className='ml-2 mt-4 lg:mt-10 w-full lg:w-1/3 top-0'>
+            <div className='sm:ml-2 mt-4 lg:mt-10 w-full lg:w-1/3 top-0'>
                 <div className='box flex flex-col border rounded-md p-10 border-gray-200 items-center text-center shadow-xl'>
-                    <Link
-                        href='#'
+                    <button
+                        onClick={() => setIsShowAppoint(true)}
                         className='bg-pink-700 p-4 rounded-md w-full text-white text-md hover:bg-pink-800 font-bold duration-500 hover:tracking-wide'>
                         Book Appointment
-                    </Link>
-                    <Link
-                        href='#'
+                    </button>
+                    <button
+                        onClick={() => setIsContactAppoint(true)}
                         className='border border-gray-700 text-gray-700 text-md font-bold mt-4 p-3 w-full rounded-md hover:bg-gray-50 duration-500 hover:tracking-wide hover:text-primary'>
                         Contact Clinic
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            {isShowAppoint && (
+                <BookAppointModal closeModal={() => setIsShowAppoint(false)} />
+            )}
+
+            {isContactAppoint && (
+                <ContactClinicModal
+                    closeModal={() => setIsContactAppoint(false)}
+                />
+            )}
         </div>
     );
 };
