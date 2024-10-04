@@ -4,6 +4,7 @@ import { useGetFeaturedGalleryQuery } from '@/redux/api/apiSlice';
 import info, { asset } from '@/assets/info';
 import Loading from '../components/commons/Loading';
 import homeData from '@/static/homepage.json';
+// import EmblaCarousel from '../components/carousel/EmblaCarousel';
 
 export default function Brands() {
     const { isError, isLoading, error, data } =
@@ -21,6 +22,13 @@ export default function Brands() {
             data,
         },
         'ignore'
+    );
+
+    const brandCarouselItems: GalleryDetailType[] = data?.data?.map(
+        (gallery: GalleryDetailType) => ({
+            title: gallery.name,
+            image: asset(gallery.image),
+        })
     );
 
     if (isLoading) return <Loading />;
@@ -41,14 +49,12 @@ export default function Brands() {
                         </h1>
                     </div>
 
-                    <BrandCarousel
-                        brands={data?.data?.map(
-                            (gallery: GalleryDetailType) => ({
-                                title: gallery.name,
-                                image: asset(gallery.image),
-                            })
-                        )}
-                    />
+                    {brandCarouselItems.length && (
+                        <BrandCarousel
+                            brands={brandCarouselItems}
+                            height={200}
+                        />
+                    )}
                 </div>
             </div>
         )

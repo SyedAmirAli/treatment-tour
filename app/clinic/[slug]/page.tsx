@@ -11,7 +11,6 @@ import AdditionalServices from './AdditionalServices';
 import Doctors from './Doctors';
 import AfterBefore from './AfterBefore';
 import PaymentService from './PaymentService';
-// import OperationHour from './OperationHour';
 import Map from './Map';
 import { useGetClinicQuery } from '@/redux/api/apiSlice';
 import Quotes from './Quotes';
@@ -22,12 +21,23 @@ export default function ClinicPage() {
     const [isGalleyModal, setIsGalleyModal] = useState(false);
     info('clinic/[slug].tsx', slug);
 
-    const { isLoading, isError, error, data } = useGetClinicQuery(slug);
+    const {
+        isLoading,
+        isError,
+        error,
+        data,
+        originalArgs,
+        requestId,
+        endpointName,
+    } = useGetClinicQuery(slug);
     info('clinic/[slug].tsx', 'useGetClinicQuery', {
         isLoading,
         isError,
         error,
         data,
+        originalArgs,
+        requestId,
+        endpointName,
     });
 
     if (isLoading) return <Loading />;
@@ -66,7 +76,7 @@ export default function ClinicPage() {
             <Appoint
                 name={data?.name}
                 title={data?.title || ''}
-                description={data?.details || ''}
+                description={data?.description || ''}
             />
 
             <Quotes clinicId={data?.id} />

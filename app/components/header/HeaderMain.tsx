@@ -47,7 +47,7 @@ export default function HeaderMain() {
                     </Link>
 
                     <div
-                        className={`hidden 2xl:!block ${
+                        className={`hidden lg:!block ${
                             activeNav ? '!block' : 'hidden'
                         }`}>
                         <Menu />
@@ -92,7 +92,7 @@ export default function HeaderMain() {
                                 <span className='hidden sm:block'>Login</span>
                             </button>
                             <button
-                                className={`block 2xl:hidden size-12 rounded-lg p-2 sm:size-10 text-white fill-white ${
+                                className={`block lg:hidden size-12 rounded-lg p-2 sm:size-10 text-white fill-white ${
                                     activeNav ? 'bg-black' : 'bg-primary'
                                 }`}
                                 onClick={() => setActiveNav(!activeNav)}>

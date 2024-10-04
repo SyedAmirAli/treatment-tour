@@ -3,8 +3,6 @@ import assets from '@/assets';
 import info from '@/assets/info';
 import {
     useGetCategoriesQuery,
-    // useGetClinicsDoctorsQuery,
-    // useGetClinicsQuery,
     useGetLocationsQuery,
 } from '@/redux/api/apiSlice';
 import Link from 'next/link';
@@ -57,7 +55,7 @@ export default function DesktopMenu() {
     );
 
     return (
-        <ul className='flex 2xl:gap-12 flex-col relative 2xl:flex-row bg-white border border-solid border-slate-300 2xl:border-none rounded-lg 2xl:bg-transparent p-4 gap-0'>
+        <ul className='flex lg:gap-8 2xl:gap-12 flex-col relative lg:flex-row bg-white border border-solid border-slate-300 lg:border-none rounded-lg lg:bg-transparent p-4 gap-0'>
             {[
                 {
                     url: '/contact',
@@ -94,8 +92,9 @@ export default function DesktopMenu() {
                 <li
                     key={i}
                     className={
-                        'group 2xl:w-32 2xl:py-4 py-1 flex flex-col 2xl:flex-row 2xl:items-center 2xl:justify-center relative group ' +
-                        (i === menuActive ? 'active' : '')
+                        'group lg:w-32 lg:py-4 py-1 flex flex-col lg:flex-row lg:items-center lg:justify-center relative group ' +
+                        (i === menuActive ? 'active' : '') +
+                        (i === 0 ? ' hidden 2xl:block' : '')
                     }>
                     <button
                         onClick={() => {
@@ -105,11 +104,11 @@ export default function DesktopMenu() {
                                 } else setMenuActive(i);
                             }
                         }}
-                        className='text-md flex gap-1 items-center 2xl:justify-center justify-between font-semibold bg-slate-100 px-4 rounded-md w-full 2xl:w-auto 2xl:rounded-full py-3 text-slate-600 fill-slate-600 h-[44px] duration-300 group-hover:bg-primary group-hover:text-slate-100 group-[.active]:bg-primary group-[.active]:text-slate-100'>
+                        className='text-md flex gap-1 items-center lg:justify-center justify-between font-semibold bg-slate-100 px-4 rounded-md w-full lg:w-auto lg:rounded-full py-3 text-slate-600 fill-slate-600 h-[44px] duration-300 group-hover:bg-primary group-hover:text-slate-100 group-[.active]:bg-primary group-[.active]:text-slate-100'>
                         <Link
                             href={item.url}
                             className='flex gap-1 items-center justify-center'>
-                            <i className='block group-hover:pr-2 group-[.active]:pr-2 duration-500 size-7 pr-2 2xl:pr-0 fill-primary 2xl:size-0 2xl:group-hover:size-7 group-[.active]:w-7 group-[.active]:h-7 group-[.active]:fill-slate-100 group-hover:fill-slate-100'>
+                            <i className='block group-hover:pr-2 group-[.active]:pr-2 duration-500 size-7 pr-2 lg:pr-0 fill-primary lg:size-0 lg:group-hover:size-7 group-[.active]:w-7 group-[.active]:h-7 group-[.active]:fill-slate-100 group-hover:fill-slate-100'>
                                 {item.icon}
                             </i>
                             <span className='leading-3'>{item.title}</span>
@@ -149,7 +148,7 @@ interface ChildrenMenuProps {
 
 function ChildrenMenu({ menu, prefix, suffix }: ChildrenMenuProps) {
     return (
-        <ul className='2xl:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 group-hover:py-4'>
+        <ul className='lg:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 lg:group-hover:py-4'>
             {menu.map((cItem, i) => (
                 <ChildrenMenuItem
                     menuItem={cItem}
@@ -175,7 +174,7 @@ function ChildrenMenuItem({
     const fullUrl = url || `/${prefix}${suffix ? suffix : ''}/${id}`;
 
     return (
-        <li className='px-4 py-1 2xl:w-56 hidden 2xl:group-hover:!block group-[.active]:block 2xl:group-[.active]:hidden group children relative'>
+        <li className='px-4 py-1 lg:w-56 hidden lg:group-hover:!block group-[.active]:block lg:group-[.active]:hidden group children relative'>
             <Link
                 href={fullUrl || '#'}
                 className='flex gap-2 py-4 rounded-lg px-3 font-medium text-lg capitalize w-full justify-between items-center bg-slate-50 text-slate-500 border border-solid border-slate-100 hover:bg-slate-100 hover:text-primary hover:fill-primary hover:tracking-wide duration-500'>
@@ -188,11 +187,11 @@ function ChildrenMenuItem({
             </Link>
 
             {Array.isArray(subcategories) && subcategories.length > 0 && (
-                <div className='hidden group-[.children:hover]:block 2xl:absolute left-56 -top-16'>
+                <div className='hidden group-[.children:hover]:block lg:absolute left-56 -top-16'>
                     <ChildrenMenu
                         menu={subcategories}
                         prefix={prefix}
-                        suffix={suffix === '' ? '/state' : suffix} // Only append suffix if it's empty
+                        suffix={suffix === '' ? '/state' : suffix}
                     />
                 </div>
             )}

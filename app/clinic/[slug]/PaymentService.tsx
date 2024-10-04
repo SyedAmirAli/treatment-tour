@@ -30,6 +30,7 @@ export default function PaymentService() {
                                     alt={i + '-img'}
                                     width={100}
                                     height={100}
+                                    unoptimized
                                 />
                             </figure>
                         ))}

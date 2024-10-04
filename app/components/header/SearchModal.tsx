@@ -137,7 +137,7 @@ export default function SearchModal() {
                         </button>
                     </div>
 
-                    <div className='w-full mt-3 max-h-[50vh] overflow-y-scroll sm:scrollbar-primary'>
+                    <div className='w-full mt-3 max-h-[50vh] overflow-y-scroll scrollbar-primary'>
                         {filteredClinics.map((clinic: ClinicDetails) => (
                             <SearchItemCard
                                 key={clinic.id}
@@ -146,7 +146,7 @@ export default function SearchModal() {
                                 title={clinic.name}
                                 totalRating={clinic?.total_rating || 0}
                                 caption={clinic?.caption || ''}
-                                description={clinic.description}
+                                description={clinic.address}
                             />
                         ))}
                     </div>
