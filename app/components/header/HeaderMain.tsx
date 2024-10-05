@@ -85,12 +85,14 @@ export default function HeaderMain() {
                                     User Profile
                                 </span>
                             </button>
-                            <button
+                            <Link
+                                target='_blank'
+                                href='https://app.medservebd.com/'
                                 className='flex gap-3 items-center justify-center bg-black border border-solid border-slate-300 px-3 py-3 sm:py-2 sm:rounded-md uppercase font-bold text-slate-100 text-sm fill-slate-100 duration-500 hover:bg-primary rounded-full'
                                 onClick={loginHandler}>
                                 <i className='w-4 h-4'>{assets.svg.login}</i>
                                 <span className='hidden sm:block'>Login</span>
-                            </button>
+                            </Link>
                             <button
                                 className={`block lg:hidden size-12 rounded-lg p-2 sm:size-10 text-white fill-white ${
                                     activeNav ? 'bg-black' : 'bg-primary'
