@@ -94,7 +94,7 @@ export default function DesktopMenu() {
                     className={
                         'group lg:w-32 lg:py-4 py-1 flex flex-col lg:flex-row lg:items-center lg:justify-center relative group ' +
                         (i === menuActive ? 'active' : '') +
-                        (i === 0 ? ' hidden 2xl:block' : '')
+                        (i === 0 ? ' hidden' : '')
                     }>
                     <button
                         onClick={() => {

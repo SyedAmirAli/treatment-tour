@@ -6,8 +6,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function Review({ clinicId }: { clinicId: string }) {
-    const { isLoading, isError, error, data, refetch } =
-        useGetReviewsQuery(clinicId);
+    const { isLoading, isError, error, data } = useGetReviewsQuery(clinicId);
 
     // Logging for debugging
     info(
@@ -102,13 +101,13 @@ export default function Review({ clinicId }: { clinicId: string }) {
                     </table>
                 </div>
             </div>
-            <div className='flex'>
+            {/* <div className='flex'>
                 <button
                     onClick={refetch}
                     className='border border-gray-700 text-gray-700 text-center text-md font-bold mt-4 py-3 px-5 duration-500 hover:border-primary rounded-md hover:bg-gray-50 bg-white hover:text-primary'>
                     Show More Reviews
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }

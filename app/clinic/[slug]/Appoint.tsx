@@ -28,10 +28,16 @@ const Appoint: React.FC<AppointProps> = ({ name, title, description }) => {
                         style={{ rotate: isShow ? '180deg' : '0deg' }}></i>
                 </button>
 
-                {isShow && (
+                {isShow ? (
                     <div
                         className='py-4 px-1'
                         dangerouslySetInnerHTML={{ __html: description }}></div>
+                ) : (
+                    <div
+                        className='py-4 px-1'
+                        dangerouslySetInnerHTML={{
+                            __html: description.slice(0, 300) + '...',
+                        }}></div>
                 )}
             </div>
             <div className='sm:ml-2 mt-4 lg:mt-10 w-full lg:w-1/3 top-0'>
