@@ -1,0 +1,311 @@
+[
+    {
+        "id": 2,
+        "name": "Locations",
+        "slug": "locations-main",
+        "icon": "<i class='fa-solid fa-location-arrow'></i>",
+        "image": "/images/locations_main.png",
+        "url": "/locations",
+        "children": [
+            {
+                "id": 21,
+                "name": "USA",
+                "slug": "usa",
+                "icon": "<i class='fa-solid fa-flag-usa'></i>",
+                "image": "/images/usa.png",
+                "url": "/locations/usa",
+                "children": [
+                    {
+                        "id": 211,
+                        "name": "California",
+                        "slug": "california",
+                        "icon": "",
+                        "image": "/images/california.png",
+                        "url": "/locations/usa/california",
+                        "children": []
+                    },
+                    {
+                        "id": 212,
+                        "name": "Texas",
+                        "slug": "texas",
+                        "icon": "",
+                        "image": "/images/texas.png",
+                        "url": "/locations/usa/texas",
+                        "children": []
+                    },
+                    {
+                        "id": 213,
+                        "name": "Florida",
+                        "slug": "florida",
+                        "icon": "",
+                        "image": "/images/florida.png",
+                        "url": "/locations/usa/florida",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 22,
+                "name": "Canada",
+                "slug": "canada",
+                "icon": "<i class='fa-solid fa-flag-canada'></i>",
+                "image": "/images/canada.png",
+                "url": "/locations/canada",
+                "children": [
+                    {
+                        "id": 221,
+                        "name": "Ontario",
+                        "slug": "ontario",
+                        "icon": "",
+                        "image": "/images/ontario.png",
+                        "url": "/locations/canada/ontario",
+                        "children": []
+                    },
+                    {
+                        "id": 222,
+                        "name": "Quebec",
+                        "slug": "quebec",
+                        "icon": "",
+                        "image": "/images/quebec.png",
+                        "url": "/locations/canada/quebec",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "name": "India",
+                "slug": "india",
+                "icon": "<i class='fa-solid fa-flag-india'></i>",
+                "image": "/images/india.png",
+                "url": "/locations/india",
+                "children": [
+                    {
+                        "id": 231,
+                        "name": "Delhi",
+                        "slug": "delhi",
+                        "icon": "",
+                        "image": "/images/delhi.png",
+                        "url": "/locations/india/delhi",
+                        "children": []
+                    },
+                    {
+                        "id": 232,
+                        "name": "Mumbai",
+                        "slug": "mumbai",
+                        "icon": "",
+                        "image": "/images/mumbai.png",
+                        "url": "/locations/india/mumbai",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 24,
+                "name": "Australia",
+                "slug": "australia",
+                "icon": "<i class='fa-solid fa-flag-australia'></i>",
+                "image": "/images/australia.png",
+                "url": "/locations/australia",
+                "children": [
+                    {
+                        "id": 241,
+                        "name": "Sydney",
+                        "slug": "sydney",
+                        "icon": "",
+                        "image": "/images/sydney.png",
+                        "url": "/locations/australia/sydney",
+                        "children": []
+                    },
+                    {
+                        "id": 242,
+                        "name": "Melbourne",
+                        "slug": "melbourne",
+                        "icon": "",
+                        "image": "/images/melbourne.png",
+                        "url": "/locations/australia/melbourne",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 25,
+                "name": "United Kingdom",
+                "slug": "united-kingdom",
+                "icon": "<i class='fa-solid fa-flag-uk'></i>",
+                "image": "/images/uk.png",
+                "url": "/locations/united-kingdom",
+                "children": [
+                    {
+                        "id": 251,
+                        "name": "London",
+                        "slug": "london",
+                        "icon": "",
+                        "image": "/images/london.png",
+                        "url": "/locations/united-kingdom/london",
+                        "children": []
+                    },
+                    {
+                        "id": 252,
+                        "name": "Manchester",
+                        "slug": "manchester",
+                        "icon": "",
+                        "image": "/images/manchester.png",
+                        "url": "/locations/united-kingdom/manchester",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Treatments",
+        "slug": "treatments",
+        "icon": "<i class='fa-solid fa-stethoscope'></i>",
+        "image": "/images/treatments.png",
+        "url": "/treatments",
+        "children": [
+            {
+                "id": 31,
+                "name": "Dental Care",
+                "slug": "dental-care",
+                "icon": "<i class='fa-solid fa-tooth'></i>",
+                "image": "/images/dental_care.png",
+                "url": "/treatments/dental-care",
+                "children": [
+                    {
+                        "id": 311,
+                        "name": "Teeth Whitening",
+                        "slug": "teeth-whitening",
+                        "icon": "",
+                        "image": "/images/teeth_whitening.png",
+                        "url": "/treatments/dental-care/teeth-whitening",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 32,
+                "name": "Skin Care",
+                "slug": "skin-care",
+                "icon": "<i class='fa-solid fa-spa'></i>",
+                "image": "/images/skin_care.png",
+                "url": "/treatments/skin-care",
+                "children": [
+                    {
+                        "id": 321,
+                        "name": "Facial Treatment",
+                        "slug": "facial-treatment",
+                        "icon": "",
+                        "image": "/images/facial_treatment.png",
+                        "url": "/treatments/skin-care/facial-treatment",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 33,
+                "name": "Hair Care",
+                "slug": "hair-care",
+                "icon": "<i class='fa-solid fa-cut'></i>",
+                "image": "/images/hair_care.png",
+                "url": "/treatments/hair-care",
+                "children": [
+                    {
+                        "id": 331,
+                        "name": "Hair Transplant",
+                        "slug": "hair-transplant",
+                        "icon": "",
+                        "image": "/images/hair_transplant.png",
+                        "url": "/treatments/hair-care/hair-transplant",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 34,
+                "name": "Eye Care",
+                "slug": "eye-care",
+                "icon": "<i class='fa-solid fa-eye'></i>",
+                "image": "/images/eye_care.png",
+                "url": "/treatments/eye-care",
+                "children": [
+                    {
+                        "id": 341,
+                        "name": "Vision Correction",
+                        "slug": "vision-correction",
+                        "icon": "",
+                        "image": "/images/vision_correction.png",
+                        "url": "/treatments/eye-care/vision-correction",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 35,
+                "name": "Physical Therapy",
+                "slug": "physical-therapy",
+                "icon": "<i class='fa-solid fa-running'></i>",
+                "image": "/images/physical_therapy.png",
+                "url": "/treatments/physical-therapy",
+                "children": []
+            },
+            {
+                "id": 36,
+                "name": "Mental Health",
+                "slug": "mental-health",
+                "icon": "<i class='fa-solid fa-brain'></i>",
+                "image": "/images/mental_health.png",
+                "url": "/treatments/mental-health",
+                "children": []
+            },
+            {
+                "id": 37,
+                "name": "Orthopedic Care",
+                "slug": "orthopedic-care",
+                "icon": "<i class='fa-solid fa-bone'></i>",
+                "image": "/images/orthopedic_care.png",
+                "url": "/treatments/orthopedic-care",
+                "children": []
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "More",
+        "slug": "more",
+        "icon": "<i class='fa-solid fa-ellipsis-h'></i>",
+        "image": "/images/more.png",
+        "url": "#",
+        "children": [
+            {
+                "id": 41,
+                "name": "Contact",
+                "slug": "contact",
+                "icon": "<i class='fa-solid fa-envelope'></i>",
+                "image": "/images/contact.png",
+                "url": "/contact",
+                "children": []
+            },
+            {
+                "id": 42,
+                "name": "Report",
+                "slug": "report",
+                "icon": "<i class='fa-solid fa-file-alt'></i>",
+                "image": "/images/report.png",
+                "url": "/report",
+                "children": []
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Become a Partner",
+        "slug": "become-a-volunteer",
+        "icon": "<i class='fa-solid fa-hands-helping'></i>",
+        "image": "/images/volunteer.png",
+        "url": "/volunteer",
+        "children": []
+    }
+]
