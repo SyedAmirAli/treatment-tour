@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['app.medservebd.com', 'test.editboxpro.com'],
+        domains: ['app.medservebd.com', 'test.editboxpro.com', 'localhost'],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -10,6 +10,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'test.editboxpro.com',
+            },
+            {
+                protocol: 'http',
+                hostname: 'localhost',
             },
         ],
     },
