@@ -36,7 +36,9 @@ const apiSlice = createApi({
             'api'
         >
     ) => ({
-        getClinics: builder.query({ query: () => '/clinicsssssss' }),
+
+        getPateints: builder.query({ query: () => '/register-patient' }),
+        getClinics: builder.query({ query: () => '/clinics' }),
         getFeaturedGallery: builder.query({ query: () => '/featuredonss' }),
         getCategories: builder.query({ query: () => '/categoriess' }),
         getLocations: builder.query({ query: () => '/countriess' }),
@@ -125,7 +127,21 @@ const apiSlice = createApi({
                 body,
             }),
         }),
-    }),
+         registerPatient: builder.mutation({
+            query: (formPayload: FormData) => ({
+                method: 'POST',
+                url: '/register-patient',
+                body: formPayload,
+            }),
+        }),
+        registerDoctor: builder.mutation({
+                    query: (formPayload: FormData) => ({
+                        method: 'POST',
+                        url: '/register-doctor',
+                        body: formPayload,
+                    }),
+                }),
+            }),
 });
 
 export const {
@@ -155,5 +171,7 @@ export const {
     useSaveContactMutation,
     useSaveReportMutation,
     useBookAppointmentMutation,
+    useRegisterPatientMutation,
+    useRegisterDoctorMutation,
 } = apiSlice;
 export default apiSlice;

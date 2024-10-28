@@ -23,49 +23,39 @@ export default function DesktopMenu() {
             });
     }, []);
 
-    return (
-        <ul className="flex lg:gap-8 2xl:gap-12 flex-col relative lg:flex-row bg-white border border-solid border-slate-300 lg:border-none rounded-lg lg:bg-transparent p-4 gap-0">
-            {menuItems.map((item, i) => (
-                // Hide "Location" menu item
-                item.name.toLowerCase() !== "location" && (
-                    <li
-                        key={i}
-                        className={
-                            "group lg:w-32 lg:py-4 py-1 flex flex-col lg:flex-row lg:items-center lg:justify-center relative group " +
-                            (i === menuActive ? "active" : "") +
-                            (i === 0 ? " hidden" : "")
-                        }
-                    >
-                        <button
-                            onClick={() => {
-                                if (i !== 0) {
-                                    setMenuActive(menuActive === i ? -1 : i);
-                                }
-                            }}
-                            className="text-md flex gap-1 items-center lg:justify-center justify-between font-semibold bg-slate-100 px-4 rounded-md w-full lg:w-auto lg:rounded-full py-3 text-slate-600 fill-slate-600 h-[44px] duration-300 group-hover:bg-primary group-hover:text-slate-100 group-[.active]:bg-primary group-[.active]:text-slate-100"
+   return (
+        <div className="w-full bg-primary py-0">
+            <ul className="flex justify-center lg:gap-8 2xl:gap-12 items-center">
+                {menuItems.map((item, i) => (
+                    item.name.toLowerCase() !== "location" && (
+                        <li
+                            key={i}
+                            className={`group relative ${i === menuActive ? "text-white" : "text-gray-200"}`}
+                            onMouseEnter={() => setMenuActive(i)}
+                            onMouseLeave={() => setMenuActive(-1)}
                         >
-                            <Link
-                                href={item.url}
-                                className="flex gap-1 items-center justify-center"
+                            <button
+                                className="px-4 py-2 rounded bg-primary"
                             >
-                                {/* Removed Icon Rendering */}
-                                <span className="leading-3">{item.name}</span>
-                            </Link>
-                        </button>
+                                <Link href={item.url} className="flex items-center justify-center">
+                                    <span>{item.name}</span>
+                                </Link>
+                            </button>
 
-                        {item.children && item.children.length > 0 && (
-                            <ChildrenMenu menu={item.children} prefix={item.slug} />
-                        )}
-                    </li>
-                )
-            ))}
-        </ul>
+                            {item.children && item.children.length > 0 && (
+                                <ChildrenMenu menu={item.children} prefix={item.slug} />
+                            )}
+                        </li>
+                    )
+                ))}
+            </ul>
+        </div>
     );
 }
-
 function ChildrenMenu({ menu, prefix }) {
     return (
-        <ul className="lg:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 lg:group-hover:py-4">
+        <ul className="lg:absolute top-[72px] left-0 bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] group-[.active]:py-4 lg:group-hover:py-4"
+        >
             {menu.map((cItem) => (
                 <ChildrenMenuItem menuItem={cItem} key={cItem.id} prefix={prefix} />
             ))}
@@ -89,9 +79,11 @@ function ChildrenMenuItem({ menuItem, prefix }) {
                     </i>
                 )}
             </Link>
-
             {menuItem.children && menuItem.children.length > 0 && (
-                <div className="hidden group-[.children:hover]:block lg:absolute left-56 -top-16">
+                <div
+                    className="hidden group-[.children:hover]:block lg:absolute"
+                    style={{ left: '100%', top: '0px' }} 
+                >
                     <ChildrenMenu menu={menuItem.children} prefix={prefix} />
                 </div>
             )}
