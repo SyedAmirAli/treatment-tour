@@ -135,13 +135,21 @@ const apiSlice = createApi({
             }),
         }),
         registerDoctor: builder.mutation({
-                    query: (formPayload: FormData) => ({
-                        method: 'POST',
-                        url: '/register-doctor',
-                        body: formPayload,
-                    }),
-                }),
+            query: (formPayload: FormData) => ({
+                method: 'POST',
+                url: '/register-doctor',
+                body: formPayload,
             }),
+        }),
+        
+        login: builder.mutation({
+            query: (credentials) => ({
+                method: 'POST',
+                url: '/login',
+                body: credentials,
+            }),
+        }),
+}),
 });
 
 export const {
@@ -173,5 +181,6 @@ export const {
     useBookAppointmentMutation,
     useRegisterPatientMutation,
     useRegisterDoctorMutation,
+    useLoginMutation,
 } = apiSlice;
 export default apiSlice;

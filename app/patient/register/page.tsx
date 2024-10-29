@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useRegisterPatientMutation } from '@/redux/api/apiSlice';
 import Loading from '../../components/commons/Loading';
+
 
 export default function PatientRegistrationForm() {
     const [form, setForm] = useState({
@@ -32,6 +34,7 @@ export default function PatientRegistrationForm() {
         occupation: '',
         report: null,
     });
+     const router = useRouter();
 
     const [registerPatient, { isLoading, isError, isSuccess }] = useRegisterPatientMutation();
 
@@ -50,10 +53,12 @@ export default function PatientRegistrationForm() {
             formPayload.append(key, form[key]);
         });
         await registerPatient(formPayload);
-    }
 
-    if (isSuccess) alert("Patient registered successfully!");
-    if (isError) alert("Failed to register the patient.");
+        if (isSuccess) {
+            alert("Patient registered successfully!");
+             router.push('/user'); 
+        }
+    }
 
     return (
  <div className="flex justify-center mt-0 mb-5">
